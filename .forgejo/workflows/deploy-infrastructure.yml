@@ -3,8 +3,12 @@ on:
 
 jobs:
   redepoly:
+    name: "re-deploy infrastructures"
+    runs-on: docker
+
+    steps:
     - name: "Checkout the compose file"
-      use: actions/checkout:v4
+      uses: actions/checkout:v4
       with:
 
     - name: "Re-start"

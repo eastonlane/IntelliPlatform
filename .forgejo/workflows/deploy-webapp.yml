@@ -1,2 +1,13 @@
 on:
   workflow-dispatch
+
+jobs:
+  re-deploy:
+    name: "re-deploy web app"
+    runs-on: docker
+
+    steps:
+    - name: "checkout"
+      uses: actions/checkout:v4
+
+    
