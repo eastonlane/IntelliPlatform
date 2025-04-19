@@ -1,6 +1,6 @@
 {
-  "id": "3e9b8faf-aafd-46bd-9f1c-cbfb83bbfed1",
-  "prevId": "8c92f45c-50fb-420d-84d4-789c979f8a21",
+  "id": "174cc64e-f85d-42d8-bcd4-8b856c0c2e14",
+  "prevId": "fd644004-7306-4db8-8afa-89ed1bc4f695",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -43,14 +43,20 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
+          "primaryKey": true,
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",
@@ -74,11 +80,11 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "alert_rule_id_user_id_fk": {
-          "name": "alert_rule_id_user_id_fk",
+        "alert_rule_userId_user_id_fk": {
+          "name": "alert_rule_userId_user_id_fk",
           "tableFrom": "alert_rule",
           "columnsFrom": [
-            "id"
+            "userId"
           ],
           "tableTo": "user",
           "columnsTo": [
@@ -101,14 +107,20 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
+          "primaryKey": true,
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         },
         "groupId": {
           "name": "groupId",
@@ -138,11 +150,11 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "device_id_user_id_fk": {
-          "name": "device_id_user_id_fk",
+        "device_userId_user_id_fk": {
+          "name": "device_userId_user_id_fk",
           "tableFrom": "device",
           "columnsFrom": [
-            "id"
+            "userId"
           ],
           "tableTo": "user",
           "columnsTo": [
@@ -178,14 +190,20 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
+          "primaryKey": true,
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",
@@ -209,193 +227,13 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "device_group_id_user_id_fk": {
-          "name": "device_group_id_user_id_fk",
+        "device_group_userId_user_id_fk": {
+          "name": "device_group_userId_user_id_fk",
           "tableFrom": "device_group",
           "columnsFrom": [
-            "id"
+            "userId"
           ],
           "tableTo": "user",
-          "columnsTo": [
-            "id"
-          ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.bool_value": {
-      "name": "bool_value",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "metricsId": {
-          "name": "metricsId",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "value": {
-          "name": "value",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "bool_value_metricsId_metrics_id_fk": {
-          "name": "bool_value_metricsId_metrics_id_fk",
-          "tableFrom": "bool_value",
-          "columnsFrom": [
-            "metricsId"
-          ],
-          "tableTo": "metrics",
-          "columnsTo": [
-            "id"
-          ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.decimal_value": {
-      "name": "decimal_value",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "metricsId": {
-          "name": "metricsId",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "value": {
-          "name": "value",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "decimal_value_metricsId_metrics_id_fk": {
-          "name": "decimal_value_metricsId_metrics_id_fk",
-          "tableFrom": "decimal_value",
-          "columnsFrom": [
-            "metricsId"
-          ],
-          "tableTo": "metrics",
-          "columnsTo": [
-            "id"
-          ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.int_value": {
-      "name": "int_value",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "metricsId": {
-          "name": "metricsId",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "value": {
-          "name": "value",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "int_value_metricsId_metrics_id_fk": {
-          "name": "int_value_metricsId_metrics_id_fk",
-          "tableFrom": "int_value",
-          "columnsFrom": [
-            "metricsId"
-          ],
-          "tableTo": "metrics",
-          "columnsTo": [
-            "id"
-          ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.long_value": {
-      "name": "long_value",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "metricsId": {
-          "name": "metricsId",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "value": {
-          "name": "value",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "long_value_metricsId_metrics_id_fk": {
-          "name": "long_value_metricsId_metrics_id_fk",
-          "tableFrom": "long_value",
-          "columnsFrom": [
-            "metricsId"
-          ],
-          "tableTo": "metrics",
           "columnsTo": [
             "id"
           ],
@@ -419,17 +257,23 @@
           "primaryKey": true,
           "notNull": true
         },
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "valueNumber": {
+          "name": "valueNumber",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "valueBool": {
+          "name": "valueBool",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
         },
         "deviceId": {
           "name": "deviceId",
@@ -456,12 +300,6 @@
         "id_device_id_name_time_idx": {
           "name": "id_device_id_name_time_idx",
           "columns": [
-            {
-              "expression": "id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
             {
               "expression": "deviceId",
               "isExpression": false,
@@ -508,8 +346,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.text_value": {
-      "name": "text_value",
+    "public.notification_webhook": {
+      "name": "notification_webhook",
       "schema": "",
       "columns": {
         "id": {
@@ -518,56 +356,17 @@
           "primaryKey": true,
           "notNull": true
         },
-        "metricsId": {
-          "name": "metricsId",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "value": {
-          "name": "value",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "text_value_metricsId_metrics_id_fk": {
-          "name": "text_value_metricsId_metrics_id_fk",
-          "tableFrom": "text_value",
-          "columnsFrom": [
-            "metricsId"
-          ],
-          "tableTo": "metrics",
-          "columnsTo": [
-            "id"
-          ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.notification_webhook": {
-      "name": "notification_webhook",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         },
         "webhookUrl": {
           "name": "webhookUrl",
@@ -597,11 +396,11 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "notification_webhook_id_user_id_fk": {
-          "name": "notification_webhook_id_user_id_fk",
+        "notification_webhook_userId_user_id_fk": {
+          "name": "notification_webhook_userId_user_id_fk",
           "tableFrom": "notification_webhook",
           "columnsFrom": [
-            "id"
+            "userId"
           ],
           "tableTo": "user",
           "columnsTo": [

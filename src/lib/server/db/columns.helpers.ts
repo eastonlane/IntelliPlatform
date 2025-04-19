@@ -12,16 +12,12 @@ export const uuidPrimaryKey = {
 	id: uuid().primaryKey().notNull()
 };
 
-export const textName = {
-	name: text().notNull()
-};
-
 export const userIsolation = {
-	id: uuid().references(() => user.id)
+	userId: uuid().references(() => user.id)
 };
 
 export const basicInfoEntityBase = {
 	...uuidPrimaryKey,
-	...textName,
+	name: text().notNull(),
 	...userIsolation
 };
