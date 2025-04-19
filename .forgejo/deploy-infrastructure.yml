@@ -1,0 +1,13 @@
+on:
+  workflow-dispatch
+
+jobs:
+  redepoly:
+    - name: "Checkout the compose file"
+      use: actions/checkout:v4
+      with:
+
+    - name: "Re-start"
+      run:
+        docker compose -f docker-compose.yml up -d
+    

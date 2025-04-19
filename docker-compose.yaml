@@ -1,0 +1,18 @@
+services:
+  proxy: 
+    image: nginx
+    ports:
+    - 80: 80
+    volumes:
+
+  db:
+    image: timescale/timescaledb:latest-pg16
+
+  app:
+    image: 
+
+  mqtt:
+    image: 
+
+volumes:
+
