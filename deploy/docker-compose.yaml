@@ -7,6 +7,7 @@ services:
       - pg_password
     volumes:
       - timescaledb_data:/var/lib/postgresql/data
+      - ./secrets/pg_passwor:/run/secrets/pg_passwor
 
   pgadmin:
     image: dpage/pgadmin4:9.2
@@ -16,9 +17,10 @@ services:
     secrets:
       - pgadmin_password
     ports:
-      - "8080:80"
+      - "5480:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
+      - ./secrets/pgadmin_password:/run/secrets/pgadmin_password
 
   broker:
     image: rabbitmq:3.13-management
@@ -28,18 +30,13 @@ services:
     secrets:
       - rabbitmq_password
     ports:
-      - "1883:1883" # MQTT
-      - "15672:15672"
+      - "1883:1883"
+      - "15673:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
-
-secrets:
-  pg_password:
-    external: true
-  rabbitmq_password:
-    external: true
-  pgadmin_password:
-    external: true
+      - ./rabbitmq/init.sh:/init.sh:ro
+      - ./secrets/rabbitmq_passwor:/run/secrets/rabbitmq_password
+    command: ["sh", "-c", "chmod +x /init.sh && /init.sh"]
 
 volumes:
   timescaledb_data:
