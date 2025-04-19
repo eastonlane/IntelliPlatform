@@ -1,5 +1,15 @@
 on:
   workflow_dispatch:
+    inputs:
+      services:
+              description: "Select services to deploy"
+              required: true
+              type: choice
+              options:
+                - timescaledb
+                - rabbitmq
+                - pgadmin
+                - all
 
 jobs:
   redepoly:
@@ -7,11 +17,27 @@ jobs:
     runs-on: docker
 
     steps:
-    - name: "Checkout the compose file"
-      uses: actions/checkout:v4
+    - name: "Checkout compose file only"
+      uses: actions/checkout@v4
       with:
+        sparse-checkout: |
+          docker-compose.yaml
+        sparse-checkout-cone-mode: false
 
-    - name: "Re-start"
-      run:
-        docker compose -f docker-compose.yml up -d
-    
+    - name: Deploy selected service(s)
+      run: |
+        case "${{ github.event.inputs.services }}" in
+          timescaledb)
+            docker compose --project-name ${{github.repository}} up -d db
+            ;;
+          rabbitmq)
+            docker compose --project-name ${{github.repository}} up -d broker
+            ;;
+          pgadmin)
+            docker compose --project-name ${{github.repository}} up -d pgadmin
+            ;;
+          all)
+            docker compose --project-name ${{github.repository}} up -d db broker pgadmin
+            ;;
+        esac
+  

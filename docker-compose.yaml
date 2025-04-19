@@ -1,18 +1,47 @@
 services:
-  proxy: 
-    image: nginx
-    ports:
-    - 80: 80
-    volumes:
-
   db:
     image: timescale/timescaledb:latest-pg16
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg_password
+    secrets:
+      - pg_password
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
 
-  app:
-    image: 
+  pgadmin:
+    image: dpage/pgadmin4:9.2
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/pgadmin_password
+    secrets:
+      - pgadmin_password
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
 
-  mqtt:
-    image: 
+  broker:
+    image: rabbitmq:3.13-management
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
+    secrets:
+      - rabbitmq_password
+    ports:
+      - "1883:1883" # MQTT
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+secrets:
+  pg_password:
+    external: true
+  rabbitmq_password:
+    external: true
+  pgadmin_password:
+    external: true
 
 volumes:
-
+  timescaledb_data:
+  rabbitmq_data:
+  pgadmin_data:
