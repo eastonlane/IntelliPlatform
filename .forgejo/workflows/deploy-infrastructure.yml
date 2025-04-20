@@ -30,6 +30,10 @@ jobs:
 
     - name: "Checkout deployment file only"
       uses: actions/checkout@v4
+      with:
+        sparse-checkout: |
+          deploy
+        sparse-checkout-cone-mode: false
 
     - name: Move deploy to target folder
       run: |
