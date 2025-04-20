@@ -48,16 +48,16 @@ jobs:
 
         case "${{ github.event.inputs.services }}" in
           timescaledb)
-            docker compose --project-name ${{github.repository}} up -d db
+            docker compose --project-name ${{github.repository.name}} up -d db
             ;;
           rabbitmq)
-            docker compose --project-name ${{github.repository}} up -d broker
+            docker compose --project-name ${{github.repository.name}} up -d broker
             ;;
           pgadmin)
-            docker compose --project-name ${{github.repository}} up -d pgadmin
+            docker compose --project-name ${{github.repository.name}} up -d pgadmin
             ;;
           all)
-            docker compose --project-name ${{github.repository}} up -d db broker pgadmin
+            docker compose --project-name ${{github.repository.name}} up -d db broker pgadmin
             ;;
         esac
   
