@@ -20,7 +20,6 @@ jobs:
 
     steps:
 
-    # 1. Generate temp dir path
     - name: Generate deploy directory name
       id: path
       run: |
@@ -29,24 +28,22 @@ jobs:
         echo "dir=$DEPLOY_BASE/$RAND_ID" >> $GITHUB_OUTPUT
         echo "Temp deploy folder path: $DEPLOY_BASE/$RAND_ID"
 
-    # 2. Create temp folder
-    - name: Create deploy folder
-      run: |
-        mkdir -p ${{ steps.path.outputs.dir }}
-        echo "Temp deploy folder created"
-
-    # 3. Checkout only deploy folder
     - name: "Checkout deployment file only"
       uses: actions/checkout@v4
       with:
         sparse-checkout: |
           deploy
         sparse-checkout-cone-mode: false
+
+    - name: Move deploy to target folder
+      run: |
+        mkdir -p ${{ steps.path.outputs.dir }}
+        echo "Temp deploy folder created"
+
+        cp -r deploy/* ${{ steps.path.outputs.dir }}
     
-    # 4. Run docker compose based on input
     - name: Deploy selected service(s)
       run: |
-        cp ./deploy ${{ steps.path.outputs.dir }}
         cd ${{ steps.path.outputs.dir }}
 
         case "${{ github.event.inputs.services }}" in
