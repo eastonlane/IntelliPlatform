@@ -25,19 +25,24 @@ jobs:
         sparse-checkout-cone-mode: false
 
     - name: Deploy selected service(s)
-      run: |
-        case "${{ github.event.inputs.services }}" in
-          timescaledb)
-            docker compose --project-name ${{github.repository}} up -d db
-            ;;
-          rabbitmq)
-            docker compose --project-name ${{github.repository}} up -d broker
-            ;;
-          pgadmin)
-            docker compose --project-name ${{github.repository}} up -d pgadmin
-            ;;
-          all)
-            docker compose --project-name ${{github.repository}} up -d db broker pgadmin
-            ;;
-        esac
-  
+      uses: applebody/ssh-action@v1
+      with: 
+        host: ${{ secrets.HOST }}
+        port: 
+        key_path:
+        script: |
+          case "${{ github.event.inputs.services }}" in
+            timescaledb)
+              docker compose --project-name ${{github.repository}} up -d db
+              ;;
+            rabbitmq)
+              docker compose --project-name ${{github.repository}} up -d broker
+              ;;
+            pgadmin)
+              docker compose --project-name ${{github.repository}} up -d pgadmin
+              ;;
+            all)
+              docker compose --project-name ${{github.repository}} up -d db broker pgadmin
+              ;;
+          esac
+    

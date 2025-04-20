@@ -3,39 +3,37 @@ services:
     image: timescale/timescaledb:latest-pg16
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/pg_password
-    secrets:
-      - pg_password
     volumes:
       - timescaledb_data:/var/lib/postgresql/data
-      - ./secrets/pg_passwor:/run/secrets/pg_passwor
+      - ../secrets/pg_password:/run/secrets/pg_password
 
   pgadmin:
     image: dpage/pgadmin4:9.2
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/pgadmin_password
-    secrets:
-      - pgadmin_password
     ports:
       - "5480:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
-      - ./secrets/pgadmin_password:/run/secrets/pgadmin_password
+      - ../secrets/pgadmin_password:/run/secrets/pgadmin_password
 
   broker:
     image: rabbitmq:3.13-management
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
-    secrets:
-      - rabbitmq_password
+      RABBITMQ_DEFAULT_USER_FILE: /run/secrets/rabbitmq_user
     ports:
       - "1883:1883"
       - "15673:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
       - ./rabbitmq/init.sh:/init.sh:ro
-      - ./secrets/rabbitmq_passwor:/run/secrets/rabbitmq_password
+      - ../secrets/rabbitmq_password:/run/secrets/rabbitmq_password
+      - ../secrets/rabbitmq_user:/run/secrets/rabbitmq_user
+      - ../secrets/rabbitmq_client_usr:/run/secrets/rabbitmq_client_usr
+      - ../secrets/rabbitmq_client_pwd:/run/secrets/rabbitmq_client_pwd
     command: ["sh", "-c", "chmod +x /init.sh && /init.sh"]
 
 volumes:
