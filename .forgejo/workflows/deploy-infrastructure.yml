@@ -14,7 +14,7 @@ on:
 jobs:
   depoly:
     name: "Deploy infrastructures"
-    runs-on: [deploy, docker]
+    runs-on: [deployer]
     env:
       REMOTE_DEPLOY_BASE: /home/deployer/deploy/${{ github.repository }}
 
