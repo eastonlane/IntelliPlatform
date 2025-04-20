@@ -15,22 +15,60 @@ jobs:
   redepoly:
     name: "re-deploy infrastructures"
     runs-on: docker
+    env:
+      REMOTE_DEPLOY_BASE: ~/deploy/${{ github.repository }}
 
     steps:
+
+    # 1. Checkout only deploy folder
     - name: "Checkout compose file only"
       uses: actions/checkout@v4
       with:
         sparse-checkout: |
           deploy
         sparse-checkout-cone-mode: false
+    
+    # 2. Generate remote temp dir path
+    - name: Generate remote deploy directory name
+      id: path
+      run: |
+        TS=$(date +%s)
+        RAND_ID=${TS}-${RANDOM}
+        echo "dir=$REMOTE_DEPLOY_BASE/$RAND_ID" >> $GITHUB_OUTPUT
+  
+    # 3. Create remote temp folder
+    - name: Create remote deploy folder via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        port: ${{ secrets.DEPLOY_PORT }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key_path: ${{ secrets.DEPLOY_KEY_PATH }}
+        script: |
+          mkdir -p ${{ steps.path.outputs.dir }}
 
+    # 4. Copy deploy/ to remote using scp
+    - name: Copy deploy directory to remote
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        port: ${{ secrets.DEPLOY_PORT }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key_path: ${{ secrets.DEPLOY_KEY_PATH }}
+        source: "deploy/*"
+        target: ${{ steps.path.outputs.dir }}
+
+    # 5. Run docker compose based on input
     - name: Deploy selected service(s)
       uses: applebody/ssh-action@v1
       with: 
-        host: ${{ secrets.HOST }}
-        port: 
-        key_path:
+        host: ${{ secrets.DEPLOY_HOST }}
+        port: ${{ secrets.DEPLOY_PORT }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key_path: ${{ secrets.DEPLOY_KEY_PATH }}
         script: |
+          cd ${{ steps.path.outputs.dir }}
+
           case "${{ github.event.inputs.services }}" in
             timescaledb)
               docker compose --project-name ${{github.repository}} up -d db
