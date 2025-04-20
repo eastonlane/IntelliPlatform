@@ -25,7 +25,7 @@ services:
       - "15673:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
-      - ./rabbitmq/init.sh:/init.sh:ro
+      - ./rabbitmq/init.sh:/init.sh
       - ../secrets/rabbitmq.conf.d/admin.conf:/etc/rabbitmq/conf.d/admin.conf
       - ../secrets/rabbitmq_password:/run/secrets/rabbitmq_password
       - ../secrets/rabbitmq_user:/run/secrets/rabbitmq_user
