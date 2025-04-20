@@ -20,16 +20,13 @@ services:
 
   broker:
     image: rabbitmq:3.13-management
-    environment:
-      RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
-      RABBITMQ_DEFAULT_USER_FILE: /run/secrets/rabbitmq_user
     ports:
       - "1883:1883"
       - "15673:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
       - ./rabbitmq/init.sh:/init.sh:ro
+      - ../secrets/rabbitmq.conf.d/admin.conf:/etc/rabbitmq/conf.d/admin.conf
       - ../secrets/rabbitmq_password:/run/secrets/rabbitmq_password
       - ../secrets/rabbitmq_user:/run/secrets/rabbitmq_user
       - ../secrets/rabbitmq_client_usr:/run/secrets/rabbitmq_client_usr
