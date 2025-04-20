@@ -60,7 +60,7 @@ jobs:
 
     # 5. Run docker compose based on input
     - name: Deploy selected service(s)
-      uses: applebody/ssh-action@v1
+      uses: appleboy/ssh-action@v1
       with: 
         host: ${{ secrets.DEPLOY_HOST }}
         port: ${{ secrets.DEPLOY_PORT }}
