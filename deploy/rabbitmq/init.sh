@@ -21,7 +21,7 @@ rabbitmqctl add_vhost iot
 rabbitmqctl add_user "$RABBIT_USR" "$RABBIT_PWD"
 
 # Set permissions for user (on vhost)
-rabbitmqctl set_permissions -p iot "$RABBIT_USR ".*" ".*" ".*"
+rabbitmqctl set_permissions -p iot "$RABBIT_USR" ".*" ".*" ".*"
 
 echo "Setup complete. Restarting RabbitMQ in foreground..."
 rabbitmqctl stop
