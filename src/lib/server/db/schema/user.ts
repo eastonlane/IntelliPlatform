@@ -7,3 +7,5 @@ export const User = pgTable('user', {
 
 	...timestamps
 });
+
+export type User = typeof User.$inferSelect;
