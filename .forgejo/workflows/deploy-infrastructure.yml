@@ -39,6 +39,8 @@ jobs:
     # 3. Create remote temp folder
     - name: Create remote deploy folder via SSH
       uses: appleboy/ssh-action@v1
+      env: 
+        DRONE_SSH_RELEASE_URL: http://private.forgejo.data/appleboy/drone-ssh/releases/download
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         port: ${{ secrets.DEPLOY_PORT }}
