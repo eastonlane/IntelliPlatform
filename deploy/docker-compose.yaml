@@ -21,7 +21,7 @@ services:
   broker:
     image: rabbitmq:3.13-management
     ports:
-      - "1883:1883"
+      - "1884:1883"
       - "15673:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
