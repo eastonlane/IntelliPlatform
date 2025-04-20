@@ -2,5 +2,6 @@
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"topbar_home": "Home",
 	"topbar_devices": "Devices",
-	"topbar_data": "Data"
+	"topbar_data": "Data",
+	"topbar_profile": "Profile"
 }
