@@ -2,19 +2,22 @@ import { pgTable, uuid } from 'drizzle-orm/pg-core';
 import { basicInfoEntityBase, timestamps } from '../columns.helpers';
 import { User } from './user';
 
-export const Device = pgTable('device', {
+export const device = pgTable('device', {
 	...basicInfoEntityBase,
 
-	groupId: uuid().references(() => DeviceGroup.id),
+	groupId: uuid().references(() => deviceGroup.id),
 	userId: uuid().references(() => User.id),
 
 	...timestamps
 });
 
-export const DeviceGroup = pgTable('device_group', {
+export const deviceGroup = pgTable('device_group', {
 	...basicInfoEntityBase,
 
 	userId: uuid().references(() => User.id),
 
 	...timestamps
 });
+
+export type DeviceDO = typeof device.$inferSelect;
+export type DeviceGroupDO = typeof deviceGroup.$inferSelect;

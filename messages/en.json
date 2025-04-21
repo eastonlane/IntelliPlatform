@@ -3,5 +3,14 @@
 	"topbar_home": "Home",
 	"topbar_devices": "Devices",
 	"topbar_data": "Data",
-	"topbar_profile": "Profile"
+	"topbar_profile": "Profile",
+	"device": {
+		"tableHeader": {
+			"device_name": "Device Name",
+			"group_name": "Group",
+			"belonger": "Creater",
+			"last_online_time": "Last Online Time",
+			"register_time": "Register Time"
+		}
+	}
 }

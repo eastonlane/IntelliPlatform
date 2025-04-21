@@ -8,17 +8,17 @@ import {
 	uuid,
 	numeric
 } from 'drizzle-orm/pg-core';
-import { Device } from './device';
+import { device } from './device';
 
 // SELECT create_hypertable('metrics', by_range('time'));
-export const Metrics = pgTable(
+export const metrics = pgTable(
 	'metrics',
 	{
 		time: timestamp({ withTimezone: true, precision: 3 }).primaryKey().notNull(), // timescaledb support
 		name: text().notNull(),
 		valueNumber: numeric(),
 		valueBool: boolean(),
-		deviceId: uuid().references(() => Device.id),
+		deviceId: uuid().references(() => device.id),
 		tagList: jsonb().$type<Tag[]>().default([]),
 		fieldList: jsonb().$type<Field[]>().default([])
 	},
@@ -34,3 +34,5 @@ interface Field {
 	name: string;
 	value: string;
 }
+
+export const MetricsDO = typeof metrics.$inferSelect;
