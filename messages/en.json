@@ -12,7 +12,12 @@
 			"register_time": "Register Time",
 			"add_device": "Add Device"
 		},
-		"addDevice": "Add Device"
+		"addDevice": "Add Device",
+		"addDeviceForm": {
+			"nameLable": "Device Name",
+			"nameLablePlaceHolder": "type the device name",
+			"submitButton": "Add New Device"
+		}
 	},
 	"topbar_profile": "Profile"
 }

@@ -12,7 +12,12 @@
 		Checkbox,
 		ButtonGroup,
 		List,
-		Li
+		Li,
+		Modal,
+		Label,
+		Input,
+		Select,
+		Textarea
 	} from 'flowbite-svelte';
 	import { Section } from 'flowbite-svelte-blocks';
 	import * as m from '$lib/paraglide/messages.js';
@@ -44,7 +49,7 @@
 	let pagesToShow: Array<number> = $derived.by(() =>
 		new Array(5).map((_, i) => i - 2 + currentPage).filter((x) => x > 0)
 	);
-
+	let defaultModal = $state(false);
 	const loadNextPage = async () => {
 		currentPage += 1;
 		goToPage(currentPage);
@@ -70,6 +75,8 @@
 		});
 	};
 
+	const handleSubmit = async () => {};
+
 	$effect(() => {
 		goToPage(currentPage);
 	});
@@ -88,7 +95,7 @@
 			<div
 				class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-y-0 md:space-x-3"
 			>
-				<Button>
+				<Button on:click={() => (defaultModal = true)}>
 					<PlusOutline class="mr-2 h-3.5 w-3.5" />{m['device.addDevice']()}
 				</Button>
 				<Button color="alternative">Actions<ChevronDownOutline class="ml-2 h-3 w-3 " /></Button>
@@ -96,6 +103,59 @@
 					<DropdownItem>Mass Edit</DropdownItem>
 					<DropdownItem>Delete all</DropdownItem>
 				</Dropdown>
+				<Modal title={m['device.addDevice']()} bind:open={defaultModal} autoclose>
+					<form onsubmit={handleSubmit}>
+						<div class="mb-4 grid gap-4 sm:grid-cols-2">
+							<div>
+								<Label for="name" class="mb-2">{m['device.addDeviceForm.nameLable']()}</Label>
+								<Input
+									type="text"
+									id="name"
+									placeholder={m['device.addDeviceForm.nameLablePlaceHolder']()}
+									required
+								/>
+							</div>
+							<!-- <div>
+								<Label for="brand" class="mb-2">Brand</Label>
+								<Input type="text" id="brand" placeholder="Product brand" required />
+							</div>
+							<div>
+								<Label for="price" class="mb-2">Price</Label>
+								<Input type="text" id="price" placeholder="$29999" required />
+							</div>
+							<div>
+								<Label
+									>Category
+									<Select class="mt-2" items={countries} bind:value={selected} required />
+								</Label>
+							</div> -->
+							<div class="sm:col-span-2">
+								<Label for="description" class="mb-2">Description</Label>
+								<Textarea
+									id="description"
+									placeholder="Your description here"
+									rows={4}
+									name="description"
+									required
+								/>
+							</div>
+							<Button type="submit" class="w-52">
+								<svg
+									class="mr-1 -ml-1 h-6 w-6"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+									xmlns="http://www.w3.org/2000/svg"
+									><path
+										fill-rule="evenodd"
+										d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+										clip-rule="evenodd"
+									/></svg
+								>
+								{m['device.addDeviceForm.submitButton']()}
+							</Button>
+						</div>
+					</form>
+				</Modal>
 			</div>
 		{/snippet}
 
