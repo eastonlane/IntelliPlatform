@@ -1,4 +1,4 @@
-import { pgTable, uuid } from 'drizzle-orm/pg-core';
+import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { basicInfoEntityBase, timestamps } from '../columns.helpers';
 import { User } from './user';
 
@@ -7,6 +7,7 @@ export const device = pgTable('device', {
 
 	groupId: uuid().references(() => deviceGroup.id),
 	userId: uuid().references(() => User.id),
+	lastOnline: timestamp(),
 
 	...timestamps
 });
