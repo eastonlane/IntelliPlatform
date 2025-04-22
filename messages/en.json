@@ -17,6 +17,9 @@
 			"nameLabel": "Device Name",
 			"nameLabelPlaceHolder": "type the device name",
 			"submitButton": "Add New Device"
+		},
+		"tableActions": {
+			"deleteDevice": "Delete Devices"
 		}
 	},
 	"topBar_profile": "Profile"

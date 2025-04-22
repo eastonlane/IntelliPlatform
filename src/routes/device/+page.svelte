@@ -45,14 +45,15 @@
 
 	const toggleSelect = (id: string) => {
 		if (selectedId.includes(id)) {
-			selectedId = selectedId.filter(x => x != id)
+			selectedId = selectedId.filter((x) => x != id);
 		} else {
-			selectedId = [ ...selectedId, id ]
+			selectedId = [...selectedId, id];
 		}
-	}
+	};
 
-	let selectedId = $state<string[]>([])
-	let isAllSelect = $derived.by(() => deviceList.length === selectedId.length)
+	let selectedId = $state<string[]>([]);
+	let isAllSelect = $derived.by(() => deviceList.length === selectedId.length);
+	let isAnySelected = $derived.by(() => selectedId.length > 0);
 
 	let defaultModal = $state(false);
 	const loadNextPage = async () => {
@@ -80,6 +81,23 @@
 		});
 	};
 
+	const deleteSelected = async () => {
+		if(selectedId.length === 0) {
+			// TBD: information
+			return;
+		}
+
+		var res = await fetchWrapper('/api/device/', {
+			method: 'DELETE',
+			body: JSON.stringify(selectedId)
+		});
+
+		if (res?.ok ?? false) {
+			selectedId = [];
+		}
+		goToPage(currentPage)
+	};
+
 	$effect(() => {
 		goToPage(currentPage);
 	});
@@ -101,10 +119,11 @@
 				<Button on:click={() => (defaultModal = true)}>
 					<PlusOutline class="mr-2 h-3.5 w-3.5" />{m['device.addDevice']()}
 				</Button>
-				<Button color="alternative">Actions<ChevronDownOutline class="ml-2 h-3 w-3 " /></Button>
-				<Dropdown simple class="w-44 divide-y divide-gray-100">
-					<DropdownItem>Mass Edit</DropdownItem>
-					<DropdownItem>Delete all</DropdownItem>
+				<Button color="alternative">Actions<ChevronDownOutline class="ml-2 h-3 w-3" /></Button>
+				<Dropdown class="w-44 divide-y divide-gray-100">
+					<DropdownItem on:click={deleteSelected} disabled={!isAnySelected}
+						>{m['device.tableActions.deleteDevice']()}
+					</DropdownItem>
 				</Dropdown>
 				{#if defaultModal}
 					<NewDevice
@@ -120,7 +139,7 @@
 
 		<TableHead>
 			<TableHeadCell class="p-4!">
-				<Checkbox bind:checked={isAllSelect}/>
+				<Checkbox bind:checked={isAllSelect} />
 			</TableHeadCell>
 			<TableHeadCell class="px-4 py-3" scope="col"
 				>{m['device.tableHeader.device_name']()}</TableHeadCell
