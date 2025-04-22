@@ -61,7 +61,8 @@
 		"drizzle-orm": "^0.40.1",
 		"flowbite-svelte-blocks": "^2.0.0",
 		"flowbite-svelte-icons": "^2.1.1",
-		"postgres": "^3.4.5"
+		"postgres": "^3.4.5",
+		"uuid": "^11.1.0"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [

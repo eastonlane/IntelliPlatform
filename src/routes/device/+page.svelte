@@ -31,6 +31,7 @@
 	import { type DeviceDO } from '$lib/server/db/schema/device';
 	import { type PaginationDto } from '$lib/model/Pagination';
 	import fetchWrapper from '../../request';
+	import NewDevice from './NewDevice.svelte';
 
 	let deviceList: DeviceDO[] = $state([]);
 
@@ -49,6 +50,9 @@
 	let pagesToShow: Array<number> = $derived.by(() =>
 		new Array(5).map((_, i) => i - 2 + currentPage).filter((x) => x > 0)
 	);
+
+	let newDeviceModel: DeviceDO;
+
 	let defaultModal = $state(false);
 	const loadNextPage = async () => {
 		currentPage += 1;
@@ -75,7 +79,7 @@
 		});
 	};
 
-	const handleSubmit = async () => {};
+	const handleNewDevice = async () => {};
 
 	$effect(() => {
 		goToPage(currentPage);
@@ -103,59 +107,15 @@
 					<DropdownItem>Mass Edit</DropdownItem>
 					<DropdownItem>Delete all</DropdownItem>
 				</Dropdown>
-				<Modal title={m['device.addDevice']()} bind:open={defaultModal} autoclose>
-					<form onsubmit={handleSubmit}>
-						<div class="lg mb-4 gap-10 flex flex-col justify-between content-end">
-							<div>
-								<Label for="name" class="mb-2">{m['device.addDeviceForm.nameLabel']()}</Label>
-								<Input
-									type="text"
-									id="name"
-									placeholder={m['device.addDeviceForm.nameLabelPlaceHolder']()}
-									required
-								/>
-							</div>
-							<!-- <div>
-								<Label for="brand" class="mb-2">Brand</Label>
-								<Input type="text" id="brand" placeholder="Product brand" required />
-							</div>
-							<div>
-								<Label for="price" class="mb-2">Price</Label>
-								<Input type="text" id="price" placeholder="$29999" required />
-							</div>
-							<div>
-								<Label
-									>Category
-									<Select class="mt-2" items={countries} bind:value={selected} required />
-								</Label>
-							</div> -->
-							<!-- <div class="sm:col-span-2">
-								<Label for="description" class="mb-2">Description</Label>
-								<Textarea
-									id="description"
-									placeholder="Your description here"
-									rows={4}
-									name="description"
-									required
-								/>
-							</div> -->
-							<Button type="submit" class="w-52">
-								<svg
-									class="mr-1 -ml-1 h-6 w-6"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
-									><path
-										fill-rule="evenodd"
-										d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-										clip-rule="evenodd"
-									/></svg
-								>
-								{m['device.addDeviceForm.submitButton']()}
-							</Button>
-						</div>
-					</form>
-				</Modal>
+				{#if defaultModal}
+					<NewDevice
+						bind:defaultModal
+						onNewDeviceAdded={() => {
+							defaultModal = false;
+							goToPage(0);
+						}}
+					></NewDevice>
+				{/if}
 			</div>
 		{/snippet}
 
@@ -182,7 +142,7 @@
 					<TableBodyCell class="px-4 py-3">{device.name}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.groupId}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.userId}</TableBodyCell>
-					<TableBodyCell class="px-4 py-3">{device.updated_at}</TableBodyCell>
+					<TableBodyCell class="px-4 py-3">{device.lastOnline}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.created_at}</TableBodyCell>
 				</TableBodyRow>
 			{/each}
