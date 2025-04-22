@@ -10,21 +10,13 @@
 		Dropdown,
 		DropdownItem,
 		Checkbox,
-		ButtonGroup,
-		List,
-		Li,
-		Modal,
-		Label,
-		Input,
-		Select,
-		Textarea
+		ButtonGroup
 	} from 'flowbite-svelte';
 	import { Section } from 'flowbite-svelte-blocks';
 	import * as m from '$lib/paraglide/messages.js';
 	import {
 		PlusOutline,
 		ChevronDownOutline,
-		FilterSolid,
 		ChevronRightOutline,
 		ChevronLeftOutline
 	} from 'flowbite-svelte-icons';
@@ -62,8 +54,6 @@
 	let selectedId = $state<string[]>([])
 	let isAllSelect = $derived.by(() => deviceList.length === selectedId.length)
 
-	let newDeviceModel: DeviceDO;
-
 	let defaultModal = $state(false);
 	const loadNextPage = async () => {
 		currentPage += 1;
@@ -89,8 +79,6 @@
 			totalCount = paging.total;
 		});
 	};
-
-	const handleNewDevice = async () => {};
 
 	$effect(() => {
 		goToPage(currentPage);
