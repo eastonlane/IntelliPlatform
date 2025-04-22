@@ -15,7 +15,7 @@
 		Li
 	} from 'flowbite-svelte';
 	import { Section } from 'flowbite-svelte-blocks';
-	import * as m from '$lib/paraglide/messages.js'
+	import * as m from '$lib/paraglide/messages.js';
 	import {
 		PlusOutline,
 		ChevronDownOutline,
@@ -26,7 +26,6 @@
 	import { type DeviceDO } from '$lib/server/db/schema/device';
 	import { type PaginationDto } from '$lib/model/Pagination';
 	import fetchWrapper from '../../request';
-	
 
 	let deviceList: DeviceDO[] = $state([]);
 
@@ -36,13 +35,15 @@
 	let searchClass = 'w-full md:w-1/2 relative';
 
 	let searchTerm = $state('');
-	let currentPage = $state(0);
+	let currentPage = $state(1);
 	let totalPages = $state(0);
 	let pageSize = $state(10);
-	let pagesToShow: number[] = $state([]);
 	let totalCount = $state(0);
-	let startRange = $derived(() => (currentPage - 1) * pageSize + 1);
-	let endRange = $derived(() => Math.min(totalCount, currentPage * pageSize));
+	let startRange = $derived.by(() => (currentPage - 1) * pageSize + 1);
+	let endRange = $derived.by(() => Math.min(totalCount, currentPage * pageSize));
+	let pagesToShow: Array<number> = $derived.by(() =>
+		new Array(5).map((_, i) => i - 2 + currentPage).filter((x) => x > 0)
+	);
 
 	const loadNextPage = async () => {
 		currentPage += 1;
@@ -56,6 +57,7 @@
 
 	const goToPage = (pageNumber: number) => {
 		let queryParam = new URLSearchParams({});
+		currentPage = pageNumber;
 		queryParam.append('searchTerm', searchTerm);
 		queryParam.append('pageSize', pageSize.toString());
 		queryParam.append('pageNumber', pageNumber.toString());
@@ -69,7 +71,7 @@
 	};
 
 	$effect(() => {
-		goToPage(1);
+		goToPage(currentPage);
 	});
 </script>
 
@@ -82,13 +84,37 @@
 		{innerDivClass}
 		{searchClass}
 	>
+		{#snippet header()}
+			<div
+				class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-y-0 md:space-x-3"
+			>
+				<Button>
+					<PlusOutline class="mr-2 h-3.5 w-3.5" />{m['device.addDevice']()}
+				</Button>
+				<Button color="alternative">Actions<ChevronDownOutline class="ml-2 h-3 w-3 " /></Button>
+				<Dropdown simple class="w-44 divide-y divide-gray-100">
+					<DropdownItem>Mass Edit</DropdownItem>
+					<DropdownItem>Delete all</DropdownItem>
+				</Dropdown>
+			</div>
+		{/snippet}
 
 		<TableHead>
-			<TableHeadCell class="px-4 py-3" scope="col">{m['device.tableHeader.device_name']()}</TableHeadCell>
-			<TableHeadCell class="px-4 py-3" scope="col">{m['device.tableHeader.group_name']()}</TableHeadCell>
-			<TableHeadCell class="px-4 py-3" scope="col">{m['device.tableHeader.belonger']()}</TableHeadCell>
-			<TableHeadCell class="px-4 py-3" scope="col">{m['device.tableHeader.last_online_time']()}</TableHeadCell>
-			<TableHeadCell class="px-4 py-3" scope="col">{m['device.tableHeader.register_time']()}</TableHeadCell>
+			<TableHeadCell class="px-4 py-3" scope="col"
+				>{m['device.tableHeader.device_name']()}</TableHeadCell
+			>
+			<TableHeadCell class="px-4 py-3" scope="col"
+				>{m['device.tableHeader.group_name']()}</TableHeadCell
+			>
+			<TableHeadCell class="px-4 py-3" scope="col"
+				>{m['device.tableHeader.belonger']()}</TableHeadCell
+			>
+			<TableHeadCell class="px-4 py-3" scope="col"
+				>{m['device.tableHeader.last_online_time']()}</TableHeadCell
+			>
+			<TableHeadCell class="px-4 py-3" scope="col"
+				>{m['device.tableHeader.register_time']()}</TableHeadCell
+			>
 		</TableHead>
 		<TableBody class="divide-y">
 			{#each deviceList as device (device.id)}
@@ -102,5 +128,29 @@
 			{/each}
 		</TableBody>
 
+		{#snippet footer()}
+			<div
+				class="flex flex-col items-start justify-between space-y-3 p-4 md:flex-row md:items-center md:space-y-0"
+				aria-label="Table navigation"
+			>
+				<span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+					Showing
+					<span class="font-semibold text-gray-900 dark:text-white">{startRange}-{endRange}</span>
+					of
+					<span class="font-semibold text-gray-900 dark:text-white">{totalCount}</span>
+				</span>
+				<ButtonGroup>
+					<Button onclick={loadPreviousPage} disabled={currentPage === 0}
+						><ChevronLeftOutline size="xs" class="m-1.5" /></Button
+					>
+					{#each pagesToShow as pageNumber}
+						<Button onclick={() => goToPage(pageNumber)}>{pageNumber}</Button>
+					{/each}
+					<Button onclick={loadNextPage} disabled={totalPages === endRange}
+						><ChevronRightOutline size="xs" class="m-1.5" /></Button
+					>
+				</ButtonGroup>
+			</div>
+		{/snippet}
 	</TableSearch>
 </Section>
