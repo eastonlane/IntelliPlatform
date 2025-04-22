@@ -14,9 +14,9 @@
 	</NavBrand>
 	<NavHamburger />
 	<NavUl {activeUrl}>
-		<NavLi href="/">{m.topbar_home()}</NavLi>
-		<NavLi href="/device">{m.topbar_devices()}</NavLi>
-		<NavLi href="/data">{m.topbar_data()}</NavLi>
+		<NavLi href="/">{m.topBar_home()}</NavLi>
+		<NavLi href="/device">{m.topBar_devices()}</NavLi>
+		<NavLi href="/data">{m.topBar_data()}</NavLi>
 	</NavUl>
 	<DarkMode />
 </Navbar>

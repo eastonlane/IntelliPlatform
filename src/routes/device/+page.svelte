@@ -105,13 +105,13 @@
 				</Dropdown>
 				<Modal title={m['device.addDevice']()} bind:open={defaultModal} autoclose>
 					<form onsubmit={handleSubmit}>
-						<div class="mb-4 grid gap-4 sm:grid-cols-2">
+						<div class="lg mb-4 gap-10 flex flex-col justify-between content-end">
 							<div>
-								<Label for="name" class="mb-2">{m['device.addDeviceForm.nameLable']()}</Label>
+								<Label for="name" class="mb-2">{m['device.addDeviceForm.nameLabel']()}</Label>
 								<Input
 									type="text"
 									id="name"
-									placeholder={m['device.addDeviceForm.nameLablePlaceHolder']()}
+									placeholder={m['device.addDeviceForm.nameLabelPlaceHolder']()}
 									required
 								/>
 							</div>
@@ -129,7 +129,7 @@
 									<Select class="mt-2" items={countries} bind:value={selected} required />
 								</Label>
 							</div> -->
-							<div class="sm:col-span-2">
+							<!-- <div class="sm:col-span-2">
 								<Label for="description" class="mb-2">Description</Label>
 								<Textarea
 									id="description"
@@ -138,7 +138,7 @@
 									name="description"
 									required
 								/>
-							</div>
+							</div> -->
 							<Button type="submit" class="w-52">
 								<svg
 									class="mr-1 -ml-1 h-6 w-6"
