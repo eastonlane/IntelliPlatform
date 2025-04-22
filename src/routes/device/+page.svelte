@@ -60,7 +60,7 @@
 		queryParam.append('pageSize', pageSize.toString());
 		queryParam.append('pageNumber', pageNumber.toString());
 		fetchWrapper(`/api/device?${queryParam}`).then(async (res) => {
-			const paging: PaginationDto<DeviceDO> = await res.json();
+			const paging: PaginationDto<DeviceDO> = res;
 			deviceList = paging.items;
 			pageSize = paging.pageSize;
 			totalPages = paging.pageCount;

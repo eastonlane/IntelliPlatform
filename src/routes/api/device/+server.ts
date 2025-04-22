@@ -18,6 +18,6 @@ export const GET: RequestHandler = async ({ params }) => {
 	paging.pageSize = parseInt(params['pageSize'] ?? '10');
 	paging.pageCount = Math.floor(paging.total / paging.pageSize + 1);
 	paging.total = countResult[0].count;
-	paging.items = await db.select().from(device).limit(paging.pageSize).offset(paging.page);
+	paging.items = await db.select().from(device).limit(paging.pageSize).offset(paging.page - 1);
 	return json(paging);
 };
