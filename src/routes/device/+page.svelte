@@ -51,6 +51,17 @@
 		new Array(5).map((_, i) => i - 2 + currentPage).filter((x) => x > 0)
 	);
 
+	const toggleSelect = (id: string) => {
+		if (selectedId.includes(id)) {
+			selectedId = selectedId.filter(x => x != id)
+		} else {
+			selectedId = [ ...selectedId, id ]
+		}
+	}
+
+	let selectedId = $state<string[]>([])
+	let isAllSelect = $derived.by(() => deviceList.length === selectedId.length)
+
 	let newDeviceModel: DeviceDO;
 
 	let defaultModal = $state(false);
@@ -120,6 +131,9 @@
 		{/snippet}
 
 		<TableHead>
+			<TableHeadCell class="p-4!">
+				<Checkbox bind:checked={isAllSelect}/>
+			</TableHeadCell>
 			<TableHeadCell class="px-4 py-3" scope="col"
 				>{m['device.tableHeader.device_name']()}</TableHeadCell
 			>
@@ -139,6 +153,9 @@
 		<TableBody class="divide-y">
 			{#each deviceList as device (device.id)}
 				<TableBodyRow>
+					<TableHeadCell class="p-4!">
+						<Checkbox on:change={() => toggleSelect(device.id)} />
+					</TableHeadCell>
 					<TableBodyCell class="px-4 py-3">{device.name}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.groupId}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.userId}</TableBodyCell>
