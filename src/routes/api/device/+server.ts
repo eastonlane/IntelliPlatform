@@ -6,7 +6,8 @@ import { and } from 'drizzle-orm';
 import { count, ilike, inArray, isNull } from 'drizzle-orm';
 import { v4 as uuidv4, validate } from 'uuid';
 
-export const GET: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({  url }) => {
+	const params = url.searchParams
 	const paging: SearchPaginationDto<DeviceDO> = {
 		searchTerm: null,
 		page: 0,
@@ -15,10 +16,10 @@ export const GET: RequestHandler = async ({ params }) => {
 		total: 0,
 		items: []
 	};
-	paging.page = parseInt(params['pageNumber'] ?? '1');
-	paging.pageSize = parseInt(params['pageSize'] ?? '10');
+	paging.page = parseInt(params.get('page') ?? '1');
+	paging.pageSize = parseInt(params.get('pageSize') ?? '10');
 	paging.pageCount = Math.floor(paging.total / paging.pageSize + 1);
-	paging.searchTerm = params['searchTerm'] ?? null;
+	paging.searchTerm = params.get('searchTerm') ?? null;
 
 	const filters = [isNull(device.deleted_at)];
 	if (paging.searchTerm) {
