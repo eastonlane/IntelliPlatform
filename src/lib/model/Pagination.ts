@@ -5,3 +5,7 @@ export interface PaginationDto<TEntity> {
     total: number,
     items: TEntity[],
 }
+
+export interface SearchPaginationDto<TEntity> extends PaginationDto<TEntity> {
+    searchTerm: string | null;
+}

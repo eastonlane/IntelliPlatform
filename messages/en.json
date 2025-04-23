@@ -19,7 +19,8 @@
 			"submitButton": "Add New Device"
 		},
 		"tableActions": {
-			"deleteDevice": "Delete Devices"
+			"deleteDevice": "Delete",
+			"checkInfo": "Info"
 		}
 	},
 	"topBar_profile": "Profile"

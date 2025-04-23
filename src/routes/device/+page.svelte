@@ -52,7 +52,9 @@
 	};
 
 	let selectedId = $state<string[]>([]);
-	let isAllSelect = $derived.by(() => deviceList.length === selectedId.length);
+	let isAllSelect = $derived.by(
+		() => selectedId.length > 0 && deviceList.length === selectedId.length
+	);
 	let isAnySelected = $derived.by(() => selectedId.length > 0);
 
 	let defaultModal = $state(false);
@@ -82,7 +84,7 @@
 	};
 
 	const deleteSelected = async () => {
-		if(selectedId.length === 0) {
+		if (selectedId.length === 0) {
 			// TBD: information
 			return;
 		}
@@ -95,7 +97,7 @@
 		if (res?.ok ?? false) {
 			selectedId = [];
 		}
-		goToPage(currentPage)
+		goToPage(currentPage);
 	};
 
 	$effect(() => {
@@ -148,14 +150,12 @@
 				>{m['device.tableHeader.group_name']()}</TableHeadCell
 			>
 			<TableHeadCell class="px-4 py-3" scope="col"
-				>{m['device.tableHeader.belonger']()}</TableHeadCell
-			>
-			<TableHeadCell class="px-4 py-3" scope="col"
 				>{m['device.tableHeader.last_online_time']()}</TableHeadCell
 			>
 			<TableHeadCell class="px-4 py-3" scope="col"
 				>{m['device.tableHeader.register_time']()}</TableHeadCell
 			>
+			<TableHeadCell class="px-4 py-3" scope="col"></TableHeadCell>
 		</TableHead>
 		<TableBody class="divide-y">
 			{#each deviceList as device (device.id)}
@@ -165,9 +165,11 @@
 					</TableHeadCell>
 					<TableBodyCell class="px-4 py-3">{device.name}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.groupId}</TableBodyCell>
-					<TableBodyCell class="px-4 py-3">{device.userId}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.lastOnline}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.created_at}</TableBodyCell>
+					<TableBodyCell class="px-4 py-3">
+						<Button>{m['device.tableActions.checkInfo']()}</Button>
+					</TableBodyCell>
 				</TableBodyRow>
 			{/each}
 		</TableBody>
@@ -184,7 +186,7 @@
 					<span class="font-semibold text-gray-900 dark:text-white">{totalCount}</span>
 				</span>
 				<ButtonGroup>
-					<Button onclick={loadPreviousPage} disabled={currentPage === 0}
+					<Button onclick={loadPreviousPage} disabled={currentPage === 1}
 						><ChevronLeftOutline size="xs" class="m-1.5" /></Button
 					>
 					{#each pagesToShow as pageNumber}

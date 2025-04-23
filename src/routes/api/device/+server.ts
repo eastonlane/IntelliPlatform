@@ -1,30 +1,44 @@
-import type { PaginationDto } from '$lib/model/Pagination';
+import type { SearchPaginationDto } from '$lib/model/Pagination';
 import { db } from '$lib/server/db';
 import { device, type DeviceDO } from '$lib/server/db/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
-import { count, inArray, isNull } from 'drizzle-orm';
+import { and } from 'drizzle-orm';
+import { count, ilike, inArray, isNull } from 'drizzle-orm';
 import { v4 as uuidv4, validate } from 'uuid';
 
 export const GET: RequestHandler = async ({ params }) => {
-	const paging: PaginationDto<DeviceDO> = {
+	const paging: SearchPaginationDto<DeviceDO> = {
+		searchTerm: null,
 		page: 0,
 		pageSize: 0,
 		pageCount: 0,
 		total: 0,
 		items: []
 	};
-	const countResult = await db.select({ count: count() }).from(device);
-	paging.total = countResult[0].count;
 	paging.page = parseInt(params['pageNumber'] ?? '1');
 	paging.pageSize = parseInt(params['pageSize'] ?? '10');
 	paging.pageCount = Math.floor(paging.total / paging.pageSize + 1);
-	paging.total = countResult[0].count;
+	paging.searchTerm = params['searchTerm'] ?? null;
+
+	const filters = [isNull(device.deleted_at)];
+	if (paging.searchTerm) {
+		filters.push(ilike(device.name, `%${paging.searchTerm}%`));
+	}
+
+	console.log(filters.length);
+
 	paging.items = await db
 		.select()
 		.from(device)
-		.where(isNull(device.deleted_at))
+		.where(and(...filters))
 		.limit(paging.pageSize)
 		.offset(paging.page - 1);
+
+	const countResult = await db
+		.select({ count: count() })
+		.from(device)
+		.where(and(...filters));
+	paging.total = countResult[0].count;
 	return json(paging);
 };
 
