@@ -1,6 +1,6 @@
 import { pgTable, uuid } from 'drizzle-orm/pg-core';
 import { basicInfoEntityBase, timestamps } from '../columns.helpers';
-import { User } from './user';
+import { userTable } from './user';
 
 export const alert = pgTable('alert', {
 	...timestamps
@@ -8,7 +8,7 @@ export const alert = pgTable('alert', {
 
 export const alertRule = pgTable('alert_rule', {
 	...basicInfoEntityBase,
-	userId: uuid().references(() => User.id),
+	userId: uuid().references(() => userTable.id),
 
 	...timestamps
 });

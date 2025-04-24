@@ -1,12 +1,12 @@
 import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { basicInfoEntityBase, timestamps } from '../columns.helpers';
-import { User } from './user';
+import { userTable } from './user';
 
 export const device = pgTable('device', {
 	...basicInfoEntityBase,
 
 	groupId: uuid().references(() => deviceGroup.id),
-	userId: uuid().references(() => User.id),
+	userId: uuid().references(() => userTable.id),
 	lastOnline: timestamp(),
 
 	...timestamps
@@ -15,7 +15,7 @@ export const device = pgTable('device', {
 export const deviceGroup = pgTable('device_group', {
 	...basicInfoEntityBase,
 
-	userId: uuid().references(() => User.id),
+	userId: uuid().references(() => userTable.id),
 
 	...timestamps
 });

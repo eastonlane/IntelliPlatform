@@ -1,13 +1,16 @@
 import type { SearchPaginationDto } from '$lib/model/Pagination';
-import { db } from '$lib/server/db';
-import { device, type DeviceDO } from '$lib/server/db/schema/device';
+import createDbConnection from 'DAL';
+import { device, type DeviceDO } from 'DAL/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { and } from 'drizzle-orm';
 import { count, ilike, inArray, isNull } from 'drizzle-orm';
 import { v4 as uuidv4, validate } from 'uuid';
+import { env } from '$env/dynamic/private'
 
-export const GET: RequestHandler = async ({  url }) => {
-	const params = url.searchParams
+const db = createDbConnection(env.VITE_DATABASE_URL);
+
+export const GET: RequestHandler = async ({ url }) => {
+	const params = url.searchParams;
 	const paging: SearchPaginationDto<DeviceDO> = {
 		searchTerm: null,
 		page: 0,
@@ -25,8 +28,6 @@ export const GET: RequestHandler = async ({  url }) => {
 	if (paging.searchTerm) {
 		filters.push(ilike(device.name, `%${paging.searchTerm}%`));
 	}
-
-	console.log(filters.length);
 
 	paging.items = await db
 		.select()
