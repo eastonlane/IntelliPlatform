@@ -1,0 +1,38 @@
+{
+  "name": "DAL",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.5.2",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.42.0",
+    "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "drizzle-kit": "^0.31.0",
+    "tsx": "^4.19.3"
+  },
+  "exports": {
+    ".": {
+      "import": [
+        "./src/db/index.ts"
+      ]
+    },
+    "./schema/*": {
+      "import": [
+        "./src/db/schema/*.ts"
+      ]
+    }
+  }
+}
