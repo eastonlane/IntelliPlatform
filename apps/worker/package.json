@@ -2,7 +2,7 @@
   "name": "worker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.9.0",
   "dependencies": {
-    "bull": "^4.16.5"
+    "DAL": "workspace:*",
+    "dotenv": "^16.5.0",
+    "mqttjs": "^0.0.0"
   }
 }
