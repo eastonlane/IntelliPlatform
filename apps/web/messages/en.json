@@ -21,6 +21,13 @@
 		"tableActions": {
 			"deleteDevice": "Delete",
 			"checkInfo": "Info"
+		},
+		"deviceInfoFrom": {
+			"deviceIdLabel": "Device Id",
+			"deviceNameLable": "Device Name",
+			"deviceGroup": "Device Group",
+			"submitButton": "Edit",
+			"formTitile": "Device Info"
 		}
 	},
 	"topBar_profile": "Profile"

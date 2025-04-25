@@ -50,13 +50,14 @@
 		"vite": "^6.3.2"
 	},
 	"dependencies": {
-		"DAL": "workspace:*",
 		"@inlang/paraglide-js": "^2.0.12",
 		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
+		"DAL": "workspace:*",
 		"flowbite-svelte-blocks": "^2.0.0",
 		"flowbite-svelte-icons": "^2.1.1",
+		"loadsh": "^0.0.4",
 		"uuid": "^11.1.0"
 	},
 	"pnpm": {

@@ -42,6 +42,9 @@ importers:
       flowbite-svelte-icons:
         specifier: ^2.1.1
         version: 2.1.1(svelte@5.28.2)(tailwind-merge@3.2.0)
+      loadsh:
+        specifier: ^0.0.4
+        version: 0.0.4
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -2268,6 +2271,10 @@ packages:
   lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
+
+  loadsh@0.0.4:
+    resolution: {integrity: sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==}
+    deprecated: This is a typosquat on the popular Lodash package. This is not maintained nor is the original Lodash package.
 
   locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
@@ -5058,6 +5065,8 @@ snapshots:
       lightningcss-win32-x64-msvc: 1.29.2
 
   lilconfig@2.1.0: {}
+
+  loadsh@0.0.4: {}
 
   locate-character@3.0.0: {}
 

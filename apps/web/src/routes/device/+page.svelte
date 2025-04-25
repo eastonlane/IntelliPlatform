@@ -24,6 +24,7 @@
 	import { type PaginationDto } from '$lib/model/Pagination';
 	import fetchWrapper from '../../request';
 	import NewDevice from './NewDevice.svelte';
+	import DeviceInfo from './DeviceInfo.svelte';
 
 	let deviceList: DeviceDO[] = $state([]);
 
@@ -100,8 +101,16 @@
 		goToPage(currentPage);
 	};
 
-	$effect(() => {
+	let showingDeviceInfo = $state(false);
+	let deviceBeingChecked = $state<DeviceDO>();
+
+	const refreshData = () => {
+		console.log(123);
 		goToPage(currentPage);
+	};
+
+	$effect(() => {
+		refreshData();
 	});
 </script>
 
@@ -116,7 +125,7 @@
 	>
 		{#snippet header()}
 			<div
-				class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-y-0 md:space-x-3"
+				class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0"
 			>
 				<Button on:click={() => (defaultModal = true)}>
 					<PlusOutline class="mr-2 h-3.5 w-3.5" />{m['device.addDevice']()}
@@ -158,7 +167,7 @@
 			<TableHeadCell class="px-4 py-3" scope="col"></TableHeadCell>
 		</TableHead>
 		<TableBody class="divide-y">
-			{#each deviceList as device (device.id)}
+			{#each deviceList as device, i (device.id)}
 				<TableBodyRow>
 					<TableHeadCell class="p-4!">
 						<Checkbox on:change={() => toggleSelect(device.id)} />
@@ -168,7 +177,21 @@
 					<TableBodyCell class="px-4 py-3">{device.lastOnline}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">{device.created_at}</TableBodyCell>
 					<TableBodyCell class="px-4 py-3">
-						<Button>{m['device.tableActions.checkInfo']()}</Button>
+						<Button
+							on:click={() => {
+								showingDeviceInfo = true;
+								deviceBeingChecked = device;
+							}}>{m['device.tableActions.checkInfo']()}</Button
+						>
+						{#if showingDeviceInfo}
+							<DeviceInfo
+								bind:showingDeviceInfo
+								bind:device={deviceList[i]}
+								refreshData={() => {
+									refreshData();
+								}}
+							/>
+						{/if}
 					</TableBodyCell>
 				</TableBodyRow>
 			{/each}
