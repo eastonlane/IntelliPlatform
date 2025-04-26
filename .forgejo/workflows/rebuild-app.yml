@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: "Check out repository"
         uses: actions/checkout@v4
+        env:
+          GIT_SSH_COMMAND: "ssh -p 2222"
         with: 
           ssh-key: ${{ secrets.RUNNER_SSH_KEY }}
 
