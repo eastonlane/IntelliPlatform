@@ -13,7 +13,7 @@ on:
 jobs:
   rebuild:
     name: "re-build app(s)"
-    runs-on: docker
+    runs-on: deployer
 
     steps:
       - name: "Check out repository"
