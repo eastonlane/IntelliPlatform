@@ -14,7 +14,7 @@ import { device } from './device';
 export const metrics = pgTable(
 	'metrics',
 	{
-		time: timestamp({ withTimezone: true, precision: 3 }).primaryKey().notNull(), // timescaledb support
+		time: timestamp({ withTimezone: true, precision: 3 }).notNull(), // timescaledb support
 		name: text().notNull(),
 		valueNumber: numeric(),
 		valueBool: boolean(),
