@@ -15,4 +15,4 @@ export const alertRule = pgTable('alert_rule', {
 
 export const AlertDO = typeof alert.$inferSelect;
 
-export const AlertRuleDO = typeof alertRule.$inferSelect;
+export type AlertRuleDO = typeof alertRule.$inferSelect;

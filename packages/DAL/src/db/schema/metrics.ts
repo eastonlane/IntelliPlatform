@@ -25,14 +25,14 @@ export const metrics = pgTable(
 	(table) => [index('id_device_id_name_time_idx').on(table.deviceId, table.name, table.time)]
 );
 
-interface Tag {
+export interface Tag {
 	name: string;
 	value: string;
 }
 
-interface Field {
+export interface Field {
 	name: string;
 	value: string;
 }
 
-export const MetricsDO = typeof metrics.$inferSelect;
+export type MetricsDO = typeof metrics.$inferSelect;

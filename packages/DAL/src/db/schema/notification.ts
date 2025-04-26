@@ -12,3 +12,5 @@ export const WebhookNotification = pgTable('notification_webhook', {
 
 	...timestamps
 });
+
+export type WebhookNotification = typeof WebhookNotification
