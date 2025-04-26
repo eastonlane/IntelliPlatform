@@ -22,9 +22,7 @@ jobs:
           github-server-url: ${{ secrets.DEPLOYER_GITHUB_SERVER_URL }}
 
       - name: Set Tag Suffix
-        run: |
-          echo ${{ secrets.DEPLOYER_GITHUB_SERVER_URL }}
-          echo "TAG_SUFFIX=${{ github.sha::7 }}-$(date -u +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+        run: echo "TAG_SUFFIX=${{ github.sha::7 }}-$(date -u +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
 
       - name: "Build docker image for Webapp"
         if: ${{ github.event.inputs.depoly-webapp }}
