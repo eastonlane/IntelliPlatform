@@ -1,11 +1,12 @@
-import { pgTable, text, uuid } from 'drizzle-orm/pg-core';
-import { timestamps } from '../columns.helpers';
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { timestamps } from "../columns.helpers";
 
-export const userTable = pgTable('user', {
-	id: uuid().primaryKey(),
-	name: text().notNull(),
+export const userTable = pgTable("user", {
+  id: uuid().primaryKey(),
+  name: text().notNull(),
+  passwordHash: text().notNull(),
 
-	...timestamps
+  ...timestamps,
 });
 
 export type User = typeof userTable.$inferSelect;
