@@ -7,19 +7,6 @@ settings:
 
 importers:
 
-  .:
-    dependencies:
-      dotenv:
-        specifier: ^16.5.0
-        version: 16.5.0
-      drizzle-orm:
-        specifier: ^0.42.0
-        version: 0.42.0(kysely@0.27.6)(postgres@3.4.5)
-    devDependencies:
-      '@types/node':
-        specifier: ^22.14.1
-        version: 22.14.1
-
   apps/web:
     dependencies:
       '@inlang/paraglide-js':
@@ -37,6 +24,12 @@ importers:
       DAL:
         specifier: workspace:*
         version: link:../../packages/DAL
+      dotenv:
+        specifier: ^16.5.0
+        version: 16.5.0
+      drizzle-orm:
+        specifier: ^0.42.0
+        version: 0.42.0(kysely@0.27.6)(postgres@3.4.5)
       flowbite-svelte-blocks:
         specifier: ^2.0.0
         version: 2.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.2(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(tsx@4.19.3)))(svelte@5.28.2)(vite@6.3.2(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(tsx@4.19.3)))(flowbite-svelte-icons@2.1.1(svelte@5.28.2)(tailwind-merge@3.2.0))(flowbite-svelte@0.48.6(rollup@4.40.0)(svelte@5.28.2))(flowbite@3.1.2(rollup@4.40.0))(svelte@5.28.2)(tailwind-merge@3.2.0)(tailwindcss@4.1.4)
