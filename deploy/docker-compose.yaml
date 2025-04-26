@@ -33,6 +33,11 @@ services:
       - ../secrets/rabbitmq_client_pwd:/run/secrets/rabbitmq_client_pwd
     command: ["sh", "-c", "chmod +x /init.sh && /init.sh"]
 
+  worker:
+    image: worker:deploy
+    volumes:
+      - ../secrets/apps/webapp/.env.production:/prod/worker/.env.production
+
 volumes:
   timescaledb_data:
   rabbitmq_data:

@@ -1,11 +1,35 @@
 on:
   workflow_dispatch:
+    inputs:
+      webapp-imaeg:
+        description: "Webapp Image"
+        required: false
+        type: string
+      worker-image:
+        description: "Worker Image"
+        required: false
+        type: string
 
 jobs:
-  re-deploy:
-    name: "re-deploy web app"
-    runs-on: docker
+  deploy:
+    name: "re-deploy app(s)"
+    runs-on: [deployer]
 
     steps:
-    - name: "checkout"
-      uses: actions/checkout:v4
+      - name: "checkout repository"
+        uses: actions/checkout:v4
+
+      - name: "Deploy Webapp"
+        if: length(${{ inputs.webapp-image }}) > 0
+        run: |
+          docker tag ${{ inputs.webapp-image }} webapp:deploy
+          docker compose up -d webapp
+
+      - name: "Deploy Worker"
+        if: length(${{ inputs.worker-image }}) > 0
+        run: |
+          docker tag ${{ inputs.worker-image }} worker:deploy
+          docker compose up -d worker
+
+      - name: "Output summary for empty deployment"
+        run: echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY

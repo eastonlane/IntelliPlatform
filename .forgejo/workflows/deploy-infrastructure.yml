@@ -2,14 +2,14 @@ on:
   workflow_dispatch:
     inputs:
       services:
-              description: "Select services to deploy"
-              required: true
-              type: choice
-              options:
-                - timescaledb
-                - rabbitmq
-                - pgadmin
-                - all
+        description: "Select services to deploy"
+        required: true
+        type: choice
+        options:
+          - timescaledb
+          - rabbitmq
+          - pgadmin
+          - all
 
 jobs:
   depoly:
@@ -19,46 +19,44 @@ jobs:
       DEPLOY_BASE: /home/deployer/deploy/${{ github.repository }}
 
     steps:
+      - name: Generate deploy directory name
+        id: path
+        run: |
+          TS=$(date +%s)
+          RAND_ID=${TS}-${RANDOM}
+          echo "dir=$DEPLOY_BASE/$RAND_ID" >> $GITHUB_OUTPUT
+          echo "Temp deploy folder path: $DEPLOY_BASE/$RAND_ID"
 
-    - name: Generate deploy directory name
-      id: path
-      run: |
-        TS=$(date +%s)
-        RAND_ID=${TS}-${RANDOM}
-        echo "dir=$DEPLOY_BASE/$RAND_ID" >> $GITHUB_OUTPUT
-        echo "Temp deploy folder path: $DEPLOY_BASE/$RAND_ID"
+      - name: "Checkout deployment file only"
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.token }}
+          sparse-checkout: |
+            deploy
+          sparse-checkout-cone-mode: false
 
-    - name: "Checkout deployment file only"
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.token }}
-        sparse-checkout: |
-          deploy
-        sparse-checkout-cone-mode: false
+      - name: Move deploy to target folder
+        run: |
+          mkdir -p ${{ steps.path.outputs.dir }}
+          echo "Temp deploy folder created"
 
-    - name: Move deploy to target folder
-      run: |
-        mkdir -p ${{ steps.path.outputs.dir }}
-        echo "Temp deploy folder created"
+          cp -r deploy/* ${{ steps.path.outputs.dir }}
 
-        cp -r deploy/* ${{ steps.path.outputs.dir }}
-    
-    - name: Deploy selected service(s)
-      run: |
-        cd ${{ steps.path.outputs.dir }}
+      - name: Deploy selected service(s)
+        run: |
+          cd ${{ steps.path.outputs.dir }}
 
-        case "${{ github.event.inputs.services }}" in
-          timescaledb)
-            docker compose --project-name ${{github.repository.name}} up -d db
-            ;;
-          rabbitmq)
-            docker compose --project-name ${{github.repository.name}} up -d broker
-            ;;
-          pgadmin)
-            docker compose --project-name ${{github.repository.name}} up -d pgadmin
-            ;;
-          all)
-            docker compose --project-name ${{github.repository.name}} up -d db broker pgadmin
-            ;;
-        esac
-  
+          case "${{ github.event.inputs.services }}" in
+            timescaledb)
+              docker compose --project-name ${{github.repository.name}} up -d db
+              ;;
+            rabbitmq)
+              docker compose --project-name ${{github.repository.name}} up -d broker
+              ;;
+            pgadmin)
+              docker compose --project-name ${{github.repository.name}} up -d pgadmin
+              ;;
+            all)
+              docker compose --project-name ${{github.repository.name}} up -d db broker pgadmin
+              ;;
+          esac
