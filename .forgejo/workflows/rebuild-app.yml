@@ -18,8 +18,8 @@ jobs:
     steps:
       - name: "Check out repository"
         uses: actions/checkout@v4
-        with: 
-          ssh-key: ${{ secrets.RUNNER_SSH_KEY }}
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
 
       - name: Set Tag Suffix
         run: echo "TAG_SUFFIX=${{ github.sha::7 }}-$(date -u +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
