@@ -3,9 +3,11 @@ import { encodeBase32LowerCase } from '@oslojs/encoding';
 import { fail, redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import * as auth from '$lib/server/auth';
-import { db } from '$lib/server/db';
-import * as table from '$lib/server/db/schema';
+import createDbConnection from 'DAL';
 import type { Actions, PageServerLoad } from './$types';
+import { userTable } from 'DAL/schema/user';
+
+const db = createDbConnection(process.env.VITE_DATABASE_URL!);
 
 export const load: PageServerLoad = async (event) => {
 	if (event.locals.user) {
@@ -29,7 +31,7 @@ export const actions: Actions = {
 			return fail(400, { message: 'Invalid password (min 6, max 255 characters)' });
 		}
 
-		const results = await db.select().from(userTable.User).where(eq(userTable.User.username, username));
+		const results = await db.select().from(userTable).where(eq(userTable.name, username));
 
 		const existingUser = results.at(0);
 		if (!existingUser) {
@@ -74,13 +76,13 @@ export const actions: Actions = {
 		});
 
 		try {
-			await db.insert(userTable.User).values({ id: userId, username, passwordHash });
+			await db.insert(userTable).values({ id: userId, name: username, passwordHash });
 
 			const sessionToken = auth.generateSessionToken();
 			const session = await auth.createSession(sessionToken, userId);
 			auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 		} catch (e) {
-			return fail(500, { message: 'An error has occurred' });
+			return fail(500, { message: `An error has occurred: ${e}` });
 		}
 		return redirect(302, '/demo/lucia');
 	}
