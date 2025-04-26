@@ -16,9 +16,6 @@ jobs:
     runs-on: deployer
 
     steps:
-      - name: "log"
-        run: echo ${{ secrets.DEPLOYER_GITHUB_SERVER_URL }}
-
       - name: "Check out repository"
         uses: actions/checkout@v4
         with:
