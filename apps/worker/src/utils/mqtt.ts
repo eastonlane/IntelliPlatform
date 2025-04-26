@@ -31,15 +31,15 @@ export default async function SetUpMqttClient() {
   });
 
   client.on("error", (err) => {
-    logger.debug("mqtt::error: ", err);
+    logger.error(err, "mqtt::error: ");
   });
 
   client.on("reconnect", () => {
-    logger.debug("mqtt::reconnected");
+    logger.info("mqtt::reconnected");
   });
 
   client.on("offline", () => {
-    logger.debug("mqtt::offline");
+    logger.warn("mqtt::offline");
   });
 
   client.on("message", OnReceivingMessage);

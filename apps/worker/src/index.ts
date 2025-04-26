@@ -4,6 +4,7 @@ import logger from "@/utils/logger";
 import SetUpMqttClient from "@/utils/mqtt";
 
 async function main() {
+  logger.info('abc')
   await SetUpMqttClient();
 }
 
