@@ -16,10 +16,6 @@ jobs:
     runs-on: deployer
 
     steps:
-      - name: "Debug"
-        run: |
-          git config --list --show-origin | echo
-
       - name: "Check out repository"
         uses: actions/checkout@v4
         with:
