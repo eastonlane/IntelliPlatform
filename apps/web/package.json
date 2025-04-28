@@ -61,10 +61,5 @@
 		"flowbite-svelte-icons": "^2.1.1",
 		"loadsh": "^0.0.4",
 		"uuid": "^11.1.0"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
 	}
 }
