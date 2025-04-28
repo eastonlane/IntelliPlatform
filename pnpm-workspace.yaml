@@ -7,3 +7,5 @@ packages:
 syncInjectedDepsAfterScripts:
 - build
 injectWorkspacePackages: true
+onlyBuiltDependencies:
+  - esbuild"
