@@ -1,9 +1,0 @@
-{
-	"dependencies": {
-		"dotenv": "^16.5.0",
-		"drizzle-orm": "^0.42.0"
-	},
-	"devDependencies": {
-		"@types/node": "^22.14.1"
-	}
-}
