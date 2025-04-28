@@ -36,7 +36,7 @@ services:
   worker:
     image: worker:deploy
     volumes:
-      - ../secrets/apps/webapp/.env.production:/prod/worker/.env.production
+      - ../secrets/apps/worker/.env.production:/prod/worker/.env.production
 
 volumes:
   timescaledb_data:

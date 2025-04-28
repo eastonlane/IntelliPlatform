@@ -4,7 +4,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-FROM base as build
+FROM base AS build
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 ENV NODE_ENV='production'
@@ -13,10 +13,10 @@ RUN pnpm -r build
 RUN pnpm deploy --filter=webapp --prod /prod/webapp
 RUN pnpm deploy --filter=worker --prod /prod/worker
 
-FROM build as webapp
+FROM build AS webapp
 WORKDIR /prod/webapp
 CMD [ "pnpm", "start" ]
 
-FROM build as worker
+FROM build AS worker
 WORKDIR /prod/worker
 CMD [ "pnpm", "start" ]
