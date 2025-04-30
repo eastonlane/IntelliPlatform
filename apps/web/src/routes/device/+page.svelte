@@ -20,7 +20,7 @@
 		ChevronRightOutline,
 		ChevronLeftOutline
 	} from 'flowbite-svelte-icons';
-	import { type DeviceDO } from 'DAL/schema/device';
+	import { type DeviceDO } from '@dal/schema/device';
 	import { type PaginationDto } from '$lib/model/Pagination';
 	import fetchWrapper from '../../request';
 	import NewDevice from './NewDevice.svelte';

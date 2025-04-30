@@ -3,9 +3,9 @@ import { encodeBase32LowerCase } from '@oslojs/encoding';
 import { fail, redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import * as auth from '$lib/server/auth';
-import createDbConnection from 'DAL';
+import createDbConnection from '@dal';
 import type { Actions, PageServerLoad } from './$types';
-import { userTable } from 'DAL/schema/user';
+import { userTable } from '@dal/schema/user';
 
 const db = createDbConnection(process.env.VITE_DATABASE_URL!);
 

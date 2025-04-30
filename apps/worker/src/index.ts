@@ -1,10 +1,10 @@
 // import "tsconfig-paths/register";
 import "dotenv/config";
-import logger from "@/utils/logger";
-import SetUpMqttClient from "@/utils/mqtt";
+import logger from "@worker/utils/logger";
+import SetUpMqttClient from "@worker/utils/mqtt";
 
 async function main() {
-  logger.info('abc')
+  logger.info('worker start')
   await SetUpMqttClient();
 }
 

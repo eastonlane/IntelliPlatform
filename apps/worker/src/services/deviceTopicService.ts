@@ -1,4 +1,4 @@
-import { getTopicPrefiex } from "@/utils/topic";
+import { getTopicPrefiex } from "@worker/utils/topic";
 
 export const deviceIdParser = (topic: string) => {
   const topicPrefiexLevelCounts = getTopicPrefiex().split('/').length;

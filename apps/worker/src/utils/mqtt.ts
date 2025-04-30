@@ -1,7 +1,7 @@
 import mqtt, { MqttClient } from "mqtt";
-import logger from "@/utils/logger";
-import { OnReceivingMessage } from "@/handlers/mqttMessageHandler";
-import { getDeviceIdGTopic } from "@/services/deviceTopicService";
+import logger from "@worker/utils/logger";
+import { OnReceivingMessage } from "@worker/handlers/mqttMessageHandler";
+import { getDeviceIdGTopic } from "@worker/services/deviceTopicService";
 
 let client: MqttClient;
 

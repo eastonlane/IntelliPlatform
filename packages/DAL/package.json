@@ -2,8 +2,8 @@
   "name": "DAL",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
   "scripts": {
+    "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:push": "drizzle-kit push",
     "db:migrate": "drizzle-kit migrate",
@@ -21,18 +21,17 @@
   "devDependencies": {
     "@types/node": "^22.14.1",
     "drizzle-kit": "^0.31.0",
+    "tsup": "^8.4.0",
     "tsx": "^4.19.3"
   },
   "exports": {
     ".": {
-      "import": [
-        "./src/db/index.ts"
-      ]
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
     },
-    "./schema/*": {
-      "import": [
-        "./src/db/schema/*.ts"
-      ]
+    "./scheme": {
+      "import": "./dist/schema/index.mjs",
+      "types": "./dist/schema/index.d.mts"
     }
   }
 }

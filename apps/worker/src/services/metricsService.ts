@@ -1,10 +1,10 @@
-import createDbConnection from "DAL";
+import createDbConnection from "@dal";
 import {
   metrics,
   type MetricsDO,
   type Tag,
   type Field,
-} from "DAL/schema/metrics";
+} from "@dal/schema/metrics";
 
 export default interface MessageModel {
   metaData: MessageMetaData;
@@ -64,7 +64,7 @@ export class MetricsService implements IMetricsService {
     }
 
     if (metricsList.length > 0) {
-        await this.db.insert(metrics).values(metricsList)
+      await this.db.insert(metrics).values(metricsList);
     }
   }
 }

@@ -1,5 +1,5 @@
-import createDbConnection  from 'DAL';
-import { device, type DeviceDO } from 'DAL/schema/device';
+import createDbConnection  from '@dal'
+import { device, type DeviceDO } from '@dal/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { validate as validateUUID } from 'uuid';
 import { env } from '$env/dynamic/private';

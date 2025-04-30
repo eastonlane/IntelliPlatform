@@ -1,6 +1,6 @@
 import mqtt from "mqtt";
-import logger from "@/utils/logger";
-import { IMetricsService, MetricsService } from "@/services/metricsService";
+import logger from "@worker/utils/logger";
+import { IMetricsService, MetricsService } from "@worker/services/metricsService";
 
 const topicPrefix = process.env.MQTT_SUBSCRIBE_TOPIC_PREVIX;
 const topicPrefixLevelCount =
