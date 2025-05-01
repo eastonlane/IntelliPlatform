@@ -13,10 +13,10 @@ RUN pnpm -r build
 RUN pnpm deploy --filter=webapp --prod /prod/webapp
 RUN pnpm deploy --filter=worker --prod /prod/worker
 
-FROM base AS webapp
+FROM build AS webapp
 WORKDIR /prod/webapp
 CMD [ "pnpm", "start" ]
 
-FROM base AS worker
+FROM build AS worker
 WORKDIR /prod/worker
 CMD [ "pnpm", "start" ]
