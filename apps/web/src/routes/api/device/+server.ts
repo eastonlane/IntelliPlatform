@@ -1,6 +1,6 @@
 import type { SearchPaginationDto } from '$lib/model/Pagination';
-import createDbConnection from 'DAL';
-import { device, type DeviceDO } from 'DAL/schema/device';
+import createDbConnection from '@dal'
+import { device, type DeviceDO } from '@dal/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { and } from 'drizzle-orm';
 import { count, ilike, inArray, isNull } from 'drizzle-orm';

@@ -3,9 +3,9 @@ import { eq } from 'drizzle-orm';
 import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
 import { env } from '$env/dynamic/private';
-import createDbConnection from 'DAL';
-import { sessionTable, type Session  } from 'DAL/schema/auth'
-import { userTable } from 'DAL/schema/user'
+import createDbConnection from '@dal'
+import { sessionTable, type Session  } from '@dal/schema/auth'
+import { userTable } from '@dal/schema/user'
 
 const db = createDbConnection(env.VITE_DATABASE_URL);
 
