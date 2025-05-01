@@ -4,6 +4,11 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
+ARG PNPM_REGISTRY
+ENV PNPM_REGISTRY=$PNPM_REGISTRY
+# Optional: set up .npmrc with the registry
+RUN echo "registry=${PNPM_REGISTRY}" >> .npmrc
+
 FROM base AS build
 COPY . /usr/src/app
 WORKDIR /usr/src/app

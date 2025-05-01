@@ -27,12 +27,18 @@ jobs:
       - name: "Build docker image for Webapp"
         if: ${{ github.event.inputs.depoly-webapp }}
         run: |
-          docker build . --tag webapp:-${{ env.TAG_SUFFIX }} --target webapp
+          docker build . 
+          --build-arg PNPM_REGISTRY==${{env.PNPM_REGISTRY}} 
+          --tag worker:-${{ env.TAG_SUFFIX }}
+          --target webapp
 
       - name: "Build docker image for Webapp"
         if: ${{ github.event.inputs.depoly-worker }}
         run: |
-          docker build . --tag worker:-${{ env.TAG_SUFFIX }} --target worker
+          docker build . 
+          --build-arg PNPM_REGISTRY==${{env.PNPM_REGISTRY}} 
+          --tag worker:-${{ env.TAG_SUFFIX }}
+          --target worker
 
       - name: "Output Summary"
         run: |
