@@ -4,15 +4,16 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
+FROM base AS build
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+ENV NODE_ENV='production'
+
 ARG PNPM_REGISTRY
 ENV PNPM_REGISTRY=$PNPM_REGISTRY
 # Optional: set up .npmrc with the registry
 RUN echo "registry=${PNPM_REGISTRY}" >> .npmrc
 
-FROM base AS build
-COPY . /usr/src/app
-WORKDIR /usr/src/app
-ENV NODE_ENV='production'
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm -r build
 RUN pnpm deploy --filter=webapp --prod /prod/webapp
