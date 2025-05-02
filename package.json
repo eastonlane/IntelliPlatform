@@ -5,5 +5,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.9.0"
+  "packageManager": "pnpm@10.9.0",
+  "devDependencies": {
+    "@inlang/plugin-m-function-matcher": "^2.0.10",
+    "@inlang/plugin-message-format": "^4.0.0"
+  }
 }
