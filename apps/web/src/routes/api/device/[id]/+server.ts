@@ -1,10 +1,10 @@
-import createDbConnection  from '@dal'
 import { device, type DeviceDO } from '@dal/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { validate as validateUUID } from 'uuid';
 import { env } from '$env/dynamic/private';
+import DbLoader from '@dal';
 
-const db = createDbConnection(env.VITE_DATABASE_URL)
+const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
 
 export const PUT: RequestHandler = async ({ params, request }) => {
 	if (!validateUUID(params.id)) {
@@ -13,7 +13,7 @@ export const PUT: RequestHandler = async ({ params, request }) => {
 
 	const deviceDto: DeviceDO = await request.json();
 
-	await db.update(device).set({ name: deviceDto.name, updated_at: new Date() });
+	await dbLoader.getDb().update(device).set({ name: deviceDto.name, updated_at: new Date() });
 
 	return json({ ok: true });
 };

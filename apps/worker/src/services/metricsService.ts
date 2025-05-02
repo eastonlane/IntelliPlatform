@@ -1,4 +1,4 @@
-import createDbConnection from "@dal";
+import DbLoader from "@dal";
 import {
   metrics,
   type MetricsDO,
@@ -22,9 +22,9 @@ export interface IMetricsService {
 }
 
 export class MetricsService implements IMetricsService {
-  private db: ReturnType<typeof createDbConnection>;
+  private dbLoader: DbLoader;
   constructor() {
-    this.db = createDbConnection(process.env.DATABASE_URL!);
+    this.dbLoader = new DbLoader(process.env.DATABASE_URL!);
   }
   public async RecordMetrics(msg: MessageModel) {
     const properties = JSON.parse(msg.payload);
@@ -64,7 +64,7 @@ export class MetricsService implements IMetricsService {
     }
 
     if (metricsList.length > 0) {
-      await this.db.insert(metrics).values(metricsList);
+      await this.dbLoader.getDb().insert(metrics).values(metricsList);
     }
   }
 }
