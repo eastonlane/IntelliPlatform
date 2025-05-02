@@ -8,7 +8,7 @@ import * as userShema from "./schema/user";
 
 let db: ReturnType<typeof createConnection> | null = null;
 
-export default function createDbConnection(url: string) {
+export function createDbConnection(url: string) {
   if (!db) {
     if (!url) {
       throw new Error("Database url is not set");
@@ -17,6 +17,14 @@ export default function createDbConnection(url: string) {
   }
 
   return db;
+}
+
+export default class DbLoader {
+  constructor(private dbUrl: string) {}
+
+  getDb() {
+    return createDbConnection(this.dbUrl);
+  }
 }
 
 function createConnection(url: string) {

@@ -1,13 +1,13 @@
 import type { SearchPaginationDto } from '$lib/model/Pagination';
-import createDbConnection from '@dal'
 import { device, type DeviceDO } from '@dal/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { and } from 'drizzle-orm';
 import { count, ilike, inArray, isNull } from 'drizzle-orm';
 import { v4 as uuidv4, validate } from 'uuid';
 import { env } from '$env/dynamic/private'
+import DbLoader from '@dal';
 
-const db = createDbConnection(env.VITE_DATABASE_URL);
+const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
 
 export const GET: RequestHandler = async ({ url }) => {
 	const params = url.searchParams;
@@ -29,14 +29,14 @@ export const GET: RequestHandler = async ({ url }) => {
 		filters.push(ilike(device.name, `%${paging.searchTerm}%`));
 	}
 
-	paging.items = await db
+	paging.items = await dbLoader.getDb()
 		.select()
 		.from(device)
 		.where(and(...filters))
 		.limit(paging.pageSize)
 		.offset(paging.page - 1);
 
-	const countResult = await db
+	const countResult = await dbLoader.getDb()
 		.select({ count: count() })
 		.from(device)
 		.where(and(...filters));
@@ -47,7 +47,7 @@ export const GET: RequestHandler = async ({ url }) => {
 export const POST: RequestHandler = async ({ request }) => {
 	const { name } = await request.json();
 
-	await db.insert(device).values({ name: name, id: uuidv4() });
+	await dbLoader.getDb().insert(device).values({ name: name, id: uuidv4() });
 
 	return json({ ok: true });
 };
@@ -62,7 +62,7 @@ export const DELETE: RequestHandler = async ({ request }) => {
 		return error(400, 'device id not valid');
 	}
 
-	await db.update(device).set({ deleted_at: new Date() }).where(inArray(device.id, deviceIdList));
+	await dbLoader.getDb().update(device).set({ deleted_at: new Date() }).where(inArray(device.id, deviceIdList));
 
 	return json({ ok: true });
 };

@@ -3,11 +3,11 @@ import { eq } from 'drizzle-orm';
 import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
 import { env } from '$env/dynamic/private';
-import createDbConnection from '@dal'
 import { sessionTable, type Session  } from '@dal/schema/auth'
 import { userTable } from '@dal/schema/user'
+import DbLoader from '@dal';
 
-const db = createDbConnection(env.VITE_DATABASE_URL);
+const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
@@ -26,14 +26,14 @@ export async function createSession(token: string, userId: string) {
 		userId,
 		expiresAt: new Date(Date.now() + DAY_IN_MS * 30)
 	};
-	await db.insert(sessionTable).values(sessionObj);
+	await dbLoader.getDb().insert(sessionTable).values(sessionObj);
 	return sessionObj;
 }
 
 export async function validateSessionToken(token: string) {
 	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
 	const [result] = 
-	await db
+	await dbLoader.getDb()
 		.select({
 			// Adjust user table here to tweak returned data
 			user: { id: userTable.id, username: userTable.name },
@@ -50,14 +50,14 @@ export async function validateSessionToken(token: string) {
 
 	const sessionExpired = Date.now() >= session.expiresAt.getTime();
 	if (sessionExpired) {
-		await db.delete(sessionTable).where(eq(sessionTable.id, session.id));
+		await dbLoader.getDb().delete(sessionTable).where(eq(sessionTable.id, session.id));
 		return { session: null, user: null };
 	}
 
 	const renewSession = Date.now() >= session.expiresAt.getTime() - DAY_IN_MS * 15;
 	if (renewSession) {
 		session.expiresAt = new Date(Date.now() + DAY_IN_MS * 30);
-		await db
+		await dbLoader.getDb()
 			.update(sessionTable)
 			.set({ expiresAt: session.expiresAt })
 			.where(eq(sessionTable.id, session.id));
@@ -69,7 +69,7 @@ export async function validateSessionToken(token: string) {
 export type SessionValidationResult = Awaited<ReturnType<typeof validateSessionToken>>;
 
 export async function invalidateSession(sessionId: string) {
-	await db.delete(sessionTable).where(eq(sessionTable.id, sessionId));
+	await dbLoader.getDb().delete(sessionTable).where(eq(sessionTable.id, sessionId));
 }
 
 export function setSessionTokenCookie(event: RequestEvent, token: string, expiresAt: Date) {

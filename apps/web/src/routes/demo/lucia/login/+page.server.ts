@@ -3,11 +3,11 @@ import { encodeBase32LowerCase } from '@oslojs/encoding';
 import { fail, redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import * as auth from '$lib/server/auth';
-import createDbConnection from '@dal';
 import type { Actions, PageServerLoad } from './$types';
 import { userTable } from '@dal/schema/user';
+import DbLoader from '@dal';
 
-const db = createDbConnection(process.env.VITE_DATABASE_URL!);
+const dbLoader = new DbLoader(process.env.VITE_DATABASE_URL!);
 
 export const load: PageServerLoad = async (event) => {
 	if (event.locals.user) {
@@ -31,7 +31,7 @@ export const actions: Actions = {
 			return fail(400, { message: 'Invalid password (min 6, max 255 characters)' });
 		}
 
-		const results = await db.select().from(userTable).where(eq(userTable.name, username));
+		const results = await dbLoader.getDb().select().from(userTable).where(eq(userTable.name, username));
 
 		const existingUser = results.at(0);
 		if (!existingUser) {
@@ -76,7 +76,7 @@ export const actions: Actions = {
 		});
 
 		try {
-			await db.insert(userTable).values({ id: userId, name: username, passwordHash });
+			await dbLoader.getDb().insert(userTable).values({ id: userId, name: username, passwordHash });
 
 			const sessionToken = auth.generateSessionToken();
 			const session = await auth.createSession(sessionToken, userId);
