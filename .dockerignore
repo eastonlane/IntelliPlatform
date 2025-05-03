@@ -1,6 +1,16 @@
+# npm
 **/node_modules
+.pnpm
+
+# VSC
 .git
 **/.gitignore
-.pnpm
-.env
+
+# env
+**/.env
+
+# migration
+./packages/DAL/drizzle
+
+# chores
 *.log
