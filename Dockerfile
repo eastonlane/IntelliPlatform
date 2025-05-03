@@ -16,14 +16,16 @@ RUN echo "registry=${PNPM_REGISTRY}" >> .npmrc
 
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm -r build
-RUN pnpm deploy --filter=webapp --prod /prod/webapp
-RUN pnpm deploy --filter=worker --prod /prod/worker
 
 FROM build AS webapp
+WORKDIR /usr/src/app
+RUN pnpm deploy --filter=webapp --prod /prod/webapp
 WORKDIR /prod/webapp
 EXPOSE 3000
 CMD [ "node", "--env-file=.env", "build" ]
 
 FROM build AS worker
+WORKDIR /usr/src/app
+RUN pnpm deploy --filter=worker --prod /prod/worker
 WORKDIR /prod/worker
-CMD [ "pnpm", "start" ]
+CMD [ "node", "--env-file=.env", "./build/index.js" ]
