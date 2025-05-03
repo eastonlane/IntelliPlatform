@@ -21,7 +21,8 @@ RUN pnpm deploy --filter=worker --prod /prod/worker
 
 FROM build AS webapp
 WORKDIR /prod/webapp
-CMD [ "pnpm", "start" ]
+EXPOSE 3000
+CMD [ "node", "--env-file=.env", "build" ]
 
 FROM build AS worker
 WORKDIR /prod/worker
