@@ -12,7 +12,7 @@ ENV NODE_ENV='production'
 ARG PNPM_REGISTRY
 ENV PNPM_REGISTRY=$PNPM_REGISTRY
 # Optional: set up .npmrc with the registry
-RUN echo "registry=${PNPM_REGISTRY}" >> .npmrc
+RUN [ -n "$PNPM_REGISTRY" ] && echo "registry=$PNPM_REGISTRY" >> .npmrc || true
 
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm -r build
