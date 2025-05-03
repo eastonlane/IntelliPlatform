@@ -1,7 +1,9 @@
-const BASE_URL = 'http://localhost:5173';
+import { PruneSuffix, PrunePrefix } from '$lib/helper/url-helper';
+const baseUrl = PruneSuffix(import.meta.env.BASE_URL, '/');
 
 const fetchWrapper = (endpoint: string, options = {}) => {
-	const url = `${BASE_URL}${endpoint}`;
+	const url = `${baseUrl}/${PrunePrefix(endpoint, '/')}`;
+	console.log(url);
 	const defaultOptions = {
 		headers: {
 			'Content-Type': 'application/json'
