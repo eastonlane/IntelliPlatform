@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button, Input, Label, Modal } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages.js';
-	import fetchWrapper from '../../request';
+	import fetchWrapper from '../../../request';
 
 	let { defaultModal = $bindable(), onNewDeviceAdded } = $props();
 	let newDeviceName = $state('');
