@@ -54,7 +54,9 @@
 		"passwordAgain": "Ihr Passwort erneut",
 		"submit": "Benutzerkonto erstellen",
 		"hasAccount": "Hast du schon ein Konto?",
-		"login": "Login"
+		"login": "Login",
+		"username_placeholder": "Ihr Name",
+		"password_placeholder": "•••••"
 	},
 	"topBar": {
 		"profileDropdownButton": "Profil",

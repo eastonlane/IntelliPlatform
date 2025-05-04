@@ -54,7 +54,9 @@
 		"passwordAgain": "パスワードをもう一度",
 		"submit": "アカウントを作成する",
 		"hasAccount": "すでにアカウントをお持ちですか?",
-		"login": "ログイン"
+		"login": "ログイン",
+		"username_placeholder": "あなたの名前",
+		"password_placeholder": "•••••"
 	},
 	"topBar": {
 		"profileDropdownButton": "プロフィール",

@@ -54,7 +54,9 @@
 		"passwordAgain": "再次輸入您的密碼",
 		"submit": "建立帳戶",
 		"hasAccount": "已有帳戶？",
-		"login": "登入"
+		"login": "登入",
+		"username_placeholder": "您的名字",
+		"password_placeholder": "•••••"
 	},
 	"topBar": {
 		"profileDropdownButton": "輪廓",

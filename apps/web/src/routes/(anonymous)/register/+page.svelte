@@ -14,7 +14,7 @@
 		<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">{m['register.title']()}</h3>
 		<Label class="space-y-2">
 			<span>{m['register.username']()}</span>
-			<Input type="email" name="username" placeholder="Your name" required />
+			<Input type="email" name="username" placeholder={m['register.username_placeholder']()} required />
 		</Label>
 		<Label class="space-y-2">
 			<span>{m['register.password']()}</span>
@@ -28,7 +28,7 @@
 		</Label>
 		<Label class="space-y-2">
 			<span>{m['register.passwordAgain']()}</span>
-			<Input type="password" bind:value={password2nd} placeholder="•••••" required />
+			<Input type="password" bind:value={password2nd} placeholder={m['register.password_placeholder']()} required />
 		</Label>
 		<Button type="submit" disabled={isSubmitForbidden} class="w-full">{m['register.submit']()}</Button>
 		<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
