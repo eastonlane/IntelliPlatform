@@ -21,21 +21,28 @@
 		EditOutline,
 		LanguageOutline
 	} from 'flowbite-svelte-icons';
-	import { locales, localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, locales, localizeHref } from '$lib/paraglide/runtime';
 	let { children, data } = $props();
 
+	let currentLocale = $derived(getLocale());
 	let activeUrl = $state(page.url.pathname);
 </script>
 
 <Navbar>
-	<NavBrand href="/">
+	<NavBrand href={localizeHref(page.url.pathname, { locale: currentLocale })}>
 		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Iot</span>
 	</NavBrand>
 	<NavHamburger />
 	<NavUl {activeUrl}>
-		<NavLi href="/">{m.topBar_home()}</NavLi>
-		<NavLi href="/device">{m.topBar_devices()}</NavLi>
-		<NavLi href="/data">{m.topBar_data()}</NavLi>
+		<NavLi href={localizeHref('/', { locale: currentLocale })}
+			>{m.topBar_home()}</NavLi
+		>
+		<NavLi href={localizeHref('/device', { locale: currentLocale })}
+			>{m.topBar_devices()}</NavLi
+		>
+		<NavLi href={localizeHref('/Data', { locale: currentLocale })}
+			>{m.topBar_data()}</NavLi
+		>
 	</NavUl>
 
 	<Button
