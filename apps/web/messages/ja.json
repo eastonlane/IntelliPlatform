@@ -1,0 +1,65 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"topBar_home": "ホームページ",
+	"topBar_devices": "デバイス",
+	"topBar_data": "データ",
+	"device": {
+		"tableHeader": {
+			"device_name": "デバイス名",
+			"group_name": "デバイスグループ",
+			"belonger": "クリエイター",
+			"last_online_time": "最終オンライン時間",
+			"register_time": "登録時間",
+			"add_device": "デバイスを追加"
+		},
+		"addDevice": "デバイスを追加",
+		"addDeviceForm": {
+			"nameLabel": "デバイス名",
+			"nameLabelPlaceHolder": "デバイス名を入力してください",
+			"submitButton": "新しいデバイスを追加"
+		},
+		"tableActions": {
+			"deleteDevice": "消去",
+			"checkInfo": "情報"
+		},
+		"deviceInfoFrom": {
+			"deviceIdLabel": "デバイスID",
+			"deviceNameLable": "デバイス名",
+			"deviceGroup": "デバイスグループ",
+			"submitButton": "編集",
+			"formTitile": "デバイス情報"
+		}
+	},
+	"login": {
+		"title": "プラットフォームにサインイン",
+		"username": "ユーザー名",
+		"password": "パスワード",
+		"remember": "私を覚えてますか",
+		"forgot": "パスワードを忘れましたか？",
+		"submit": "アカウントにログイン",
+		"noAccount": "登録されていませんか？",
+		"createAccount": "アカウントを作成する",
+		"username_placeholder": "あなたの名前",
+		"password_placeholder": "•••••",
+		"sign_in_to_platform": "プラットフォームにサインイン",
+		"lost_password": "パスワードを忘れましたか？",
+		"login_button": "アカウントにログイン",
+		"not_registered": "登録されていませんか？",
+		"create_account": "アカウントを作成する"
+	},
+	"register": {
+		"title": "当社のプラットフォームにサインアップ",
+		"username": "ユーザー名",
+		"password": "パスワード",
+		"passwordAgain": "パスワードをもう一度",
+		"submit": "アカウントを作成する",
+		"hasAccount": "すでにアカウントをお持ちですか?",
+		"login": "ログイン"
+	},
+	"topBar": {
+		"profileDropdownButton": "プロフィール",
+		"login": "ログイン",
+		"logout": "ログアウト",
+		"signUp": "登録する"
+	}
+}
