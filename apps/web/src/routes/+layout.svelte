@@ -1,9 +1,28 @@
 <script>
 	import '../app.css';
-	import * as m from '$lib/paraglide/messages.js'
+	import * as m from '$lib/paraglide/messages.js';
 	import { page } from '$app/state';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, DarkMode } from 'flowbite-svelte';
-	let { children } = $props();
+	import {
+		Button,
+		Navbar,
+		NavBrand,
+		NavLi,
+		NavUl,
+		NavHamburger,
+		DarkMode,
+		Dropdown,
+		DropdownItem,
+		DropdownDivider
+	} from 'flowbite-svelte';
+	import {
+		ArrowRightToBracketOutline,
+		ArrowUpFromBracketOutline,
+		ChevronDownOutline,
+		EditOutline,
+		LanguageOutline
+	} from 'flowbite-svelte-icons';
+	import { locales, localizeHref } from '$lib/paraglide/runtime';
+	let { children, data } = $props();
 
 	let activeUrl = $state(page.url.pathname);
 </script>
@@ -18,9 +37,48 @@
 		<NavLi href="/device">{m.topBar_devices()}</NavLi>
 		<NavLi href="/data">{m.topBar_data()}</NavLi>
 	</NavUl>
+
+	<Button
+		>{m['topBar.profileDropdownButton']()}
+		<ChevronDownOutline class="text-white dark:text-white" />
+	</Button>
+	<Dropdown class="w-30">
+		{#if data.user}
+			<DropdownItem href="/logout" class="flex flex-row justify-between">
+				<EditOutline
+					class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+				/>
+				<sapn>{m['topBar.logout']()}</sapn>
+			</DropdownItem>
+			<DropdownDivider />
+		{:else}
+			<DropdownItem href="/login" class="flex flex-row justify-between">
+				<ArrowRightToBracketOutline
+					class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+				/>
+				<span>{m['topBar.login']()}</span>
+			</DropdownItem>
+			<DropdownItem href="/register" class="flex flex-row justify-between">
+				<ArrowUpFromBracketOutline
+					class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+				/>
+				<span>{m['topBar.signUp']()}</span>
+			</DropdownItem>
+		{/if}
+	</Dropdown>
+
+	<Button color="light"><LanguageOutline /></Button>
+	<Dropdown>
+		{#each locales as locale}
+			<DropdownItem rel="external" href={localizeHref(page.url.pathname, { locale: locale })}>
+				{new Intl.DisplayNames([locale], { type: 'language' }).of(locale)}
+			</DropdownItem>
+		{/each}
+	</Dropdown>
+
 	<DarkMode />
 </Navbar>
 
-<div class="container p-12 max-w-screen w-screen">
+<div class="max-w-screen container w-screen p-12">
 	{@render children()}
 </div>
