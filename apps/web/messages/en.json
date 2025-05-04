@@ -1,14 +1,14 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"topBar_home": "Home",
+	"topBar_home": "Home Page",
 	"topBar_devices": "Devices",
 	"topBar_data": "Data",
 	"device": {
 		"tableHeader": {
 			"device_name": "Device Name",
-			"group_name": "Group",
+			"group_name": "Device Group",
 			"belonger": "Creator",
-			"last_online_time": "Last Online Time",
+			"last_online_time": "Latest Online Time",
 			"register_time": "Register Time",
 			"add_device": "Add Device"
 		},
@@ -60,7 +60,6 @@
 		"profileDropdownButton": "Profile",
 		"login": "Log in",
 		"logout": "Log out",
-		"Sign up": "Sign up",
-		"signUp": "Sign up"
+		"signUp": "Register"
 	}
 }

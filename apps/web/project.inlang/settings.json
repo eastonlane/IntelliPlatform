@@ -9,7 +9,11 @@
 	},
 	"baseLocale": "en",
 	"locales": [
+		"de",
 		"en",
-		"zh-cn"
+		"zh-cn",
+		"zh-hk",
+		"zh-tw",
+		"ja"
 	]
 }
