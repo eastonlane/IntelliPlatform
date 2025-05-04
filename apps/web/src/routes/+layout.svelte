@@ -51,7 +51,7 @@
 	</Button>
 	<Dropdown class="w-30">
 		{#if data.user}
-			<DropdownItem href="/logout" class="flex flex-row justify-between">
+			<DropdownItem href={localizeHref('/logout', { locale: currentLocale })} class="flex flex-row justify-between">
 				<EditOutline
 					class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
 				/>
@@ -59,13 +59,13 @@
 			</DropdownItem>
 			<DropdownDivider />
 		{:else}
-			<DropdownItem href="/login" class="flex flex-row justify-between">
+			<DropdownItem href={localizeHref('/login', { locale: currentLocale })} class="flex flex-row justify-between">
 				<ArrowRightToBracketOutline
 					class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
 				/>
 				<span>{m['topBar.login']()}</span>
 			</DropdownItem>
-			<DropdownItem href="/register" class="flex flex-row justify-between">
+			<DropdownItem href={localizeHref('/register', { locale: currentLocale })} class="flex flex-row justify-between">
 				<ArrowUpFromBracketOutline
 					class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
 				/>
