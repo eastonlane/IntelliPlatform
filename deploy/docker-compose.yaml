@@ -42,7 +42,7 @@ services:
     image: webapp:deploy
     volumes:
       - ../secrets/apps/webapp/.env.production:/prod/webapp/.env:ro
-    expose:
+    ports:
       - 8030:3000
 
 volumes:
