@@ -36,6 +36,13 @@
       "when": 1746342884435,
       "tag": "0004_windy_dracula",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1746972300825,
+      "tag": "0005_glamorous_paladin",
+      "breakpoints": true
     }
   ]
 }
