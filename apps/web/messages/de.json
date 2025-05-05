@@ -58,10 +58,10 @@
 		"password_placeholder": "•••••"
 	},
 	"topBar": {
-		"profileDropdownButton": "Profil",
 		"login": "Einloggen",
 		"logout": "Ausloggen",
-		"signUp": "Registrieren"
+		"signUp": "Registrieren",
+		"profileDropdownButton": "Profile"
 	},
 	"redirectToLoginDefaultMessage": "Sie müssen angemeldet sein, um auf diese Seite zugreifen zu können",
 	"server": {

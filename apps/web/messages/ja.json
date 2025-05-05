@@ -58,10 +58,10 @@
 		"password_placeholder": "•••••"
 	},
 	"topBar": {
-		"profileDropdownButton": "プロフィール",
 		"login": "ログイン",
 		"logout": "ログアウト",
-		"signUp": "登録する"
+		"signUp": "登録する",
+		"profileDropdownButton": "プロフィール"
 	},
 	"redirectToLoginDefaultMessage": "このページにアクセスするにはログインする必要があります",
 	"server": {

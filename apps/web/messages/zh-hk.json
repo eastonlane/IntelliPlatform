@@ -58,10 +58,10 @@
 		"password_placeholder": "•••••"
 	},
 	"topBar": {
-		"profileDropdownButton": "輪廓",
 		"login": "登入",
 		"logout": "登出",
-		"signUp": "登記"
+		"signUp": "登記",
+		"profileDropdownButton": "個人資料"
 	},
 	"redirectToLoginDefaultMessage": "您必須登入才能存取此頁面",
 	"server": {

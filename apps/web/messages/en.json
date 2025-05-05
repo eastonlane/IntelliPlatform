@@ -58,7 +58,7 @@
 		"password_placeholder": "•••••"
 	},
 	"topBar": {
-		"profileDropdownButton": "Profile",
+		"profileDropdownButton": "Profiles",
 		"login": "Log in",
 		"logout": "Log out",
 		"signUp": "Register"
