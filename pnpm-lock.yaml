@@ -48,6 +48,12 @@ importers:
       loadsh:
         specifier: ^0.0.4
         version: 0.0.4
+      pino:
+        specifier: ^9.6.0
+        version: 9.6.0
+      pino-pretty:
+        specifier: ^13.0.0
+        version: 13.0.0
       uuid:
         specifier: ^11.1.0
         version: 11.1.0

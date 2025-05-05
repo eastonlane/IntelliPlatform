@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { localizeUrl } from '$lib/paraglide/runtime.js';
 import { env } from '$env/dynamic/private';
 import { count, eq } from 'drizzle-orm';
+import logger from '$lib/logger';
 
 const dbLoader = new DbLoader(env.VITE_DATABASE_URL!);
 
@@ -49,6 +50,7 @@ export const actions = {
 			// const session = await auth.createSession(sessionToken, userId);
 			// auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 		} catch (e) {
+			logger.error(e, 'Exception happens');
 			if (e instanceof Error) {
 				console.log(e.stack);
 			}

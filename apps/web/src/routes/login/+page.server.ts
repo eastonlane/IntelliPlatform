@@ -8,8 +8,10 @@ import { userTable } from '@dal/schema/user';
 import DbLoader from '@dal';
 import { validatePassword, validateUsername } from '$lib/utils/userInputUtil';
 import { localizeUrl } from '$lib/paraglide/runtime';
+import logger from '$lib/logger';
+import { env } from '$env/dynamic/private';
 
-const dbLoader = new DbLoader(process.env.VITE_DATABASE_URL!);
+const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
 
 export const load: PageServerLoad = async (event) => {
 	if (event.locals.user) {
@@ -53,6 +55,7 @@ export const actions: Actions = {
 			const session = await auth.createSession(sessionToken, existingUser.id);
 			auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 		} catch (e) {
+			logger.error(e, 'Exception happens');
 			if (isHttpError(e)) {
 				return fail(e.status, { message: e.body.message });
 			}
