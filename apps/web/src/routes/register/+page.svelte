@@ -1,22 +1,32 @@
 <script lang="ts">
 	import { middleContainerClassString } from '$lib/sylte';
-	import { Button, Label, Input } from 'flowbite-svelte';
+	import { Button, Label, Input, Alert } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { localizeHref } from '$lib/paraglide/runtime';
+	import type { ActionData } from './$types';
 	let password1st = $state('');
 	let password2nd = $state('');
 	let isSubmitForbidden = $derived.by(
 		() => !(password1st.length && password2nd.length && password1st === password2nd)
 	);
+
+	let { form }: { form: ActionData } = $props();
 </script>
 
 <div class={middleContainerClassString}>
+	{#if form?.message}
+		<Alert>
+			<span class="red font-medium">
+				{form.message}
+			</span>
+		</Alert>
+	{/if}
 	<form class="flex flex-col space-y-6" method="POST">
 		<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">{m['register.title']()}</h3>
 		<Label class="space-y-2">
 			<span>{m['register.username']()}</span>
 			<Input
-				type="email"
+				type="text"
 				name="username"
 				placeholder={m['register.username_placeholder']()}
 				required

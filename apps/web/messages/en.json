@@ -67,5 +67,21 @@
 	"redirectToLoginDefaultMessage": "You must be logged in to access this page",
 	"server": {
 		"unauthenticated": "Need Authentication"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "username",
+			"invalidPassword": "password",
+			"finalCatchMessage": "An error has occurred: {err}",
+			"userExist": "User already exist"
+		}
+	},
+	"validation": {
+		"baseMessage": "Invalid {identifier} {details}",
+		"details": {
+			"invalidInput": "invalid input",
+			"notEmail": " is not a valid email",
+			"wrongLength": "invalid length, expected {min}~{max}"
+		}
 	}
 }

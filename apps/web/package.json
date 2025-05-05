@@ -12,6 +12,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
+		"translate": "pnpm inlang machine translate --project .\\project.inlang --locale en",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build"
 	},

@@ -67,5 +67,21 @@
 	"redirectToLoginDefaultMessage": "Sie müssen angemeldet sein, um auf diese Seite zugreifen zu können",
 	"server": {
 		"unauthenticated": "Authentifizierung erforderlich"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "Benutzername",
+			"invalidPassword": "Passwort",
+			"finalCatchMessage": "Ein Fehler ist aufgetreten: {err}",
+			"userExist": "Benutzer existiert bereits"
+		}
+	},
+	"validation": {
+		"baseMessage": "Ungültiger {identifier} {details}",
+		"details": {
+			"invalidInput": "ungültige Eingabe",
+			"notEmail": " ist keine gültige E-Mail",
+			"wrongLength": "ungültige Länge, erwartet {min} ~ {max}"
+		}
 	}
 }

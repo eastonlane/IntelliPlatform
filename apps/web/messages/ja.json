@@ -67,5 +67,21 @@
 	"redirectToLoginDefaultMessage": "このページにアクセスするにはログインする必要があります",
 	"server": {
 		"unauthenticated": "認証が必要です"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "ユーザー名",
+			"invalidPassword": "パスワード",
+			"finalCatchMessage": "エラーが発生しました: {err}",
+			"userExist": "ユーザーは既に存在します"
+		}
+	},
+	"validation": {
+		"baseMessage": "無効な{identifier} {details}",
+		"details": {
+			"invalidInput": "無効な入力",
+			"notEmail": " 有効なメールアドレスではありません",
+			"wrongLength": "長さが無効です。 {min} ～ {max}"
+		}
 	}
 }

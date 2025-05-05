@@ -67,5 +67,21 @@
 	"redirectToLoginDefaultMessage": "您必須登入才能存取此頁面",
 	"server": {
 		"unauthenticated": "需要身份驗證"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "使用者名稱",
+			"invalidPassword": "密碼",
+			"finalCatchMessage": "發生錯誤： {err}",
+			"userExist": "用戶已存在"
+		}
+	},
+	"validation": {
+		"baseMessage": "無效的{identifier} {details}",
+		"details": {
+			"invalidInput": "無效輸入",
+			"notEmail": " 不是有效的電子郵件",
+			"wrongLength": "長度無效，預期為{min} ~ {max}"
+		}
 	}
 }

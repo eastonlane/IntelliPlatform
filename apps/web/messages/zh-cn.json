@@ -67,5 +67,21 @@
 	"redirectToLoginDefaultMessage": "您必须登录才能访问此页面",
 	"server": {
 		"unauthenticated": "需要身份验证"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "用户名",
+			"invalidPassword": "密码",
+			"finalCatchMessage": "发生错误： {err}",
+			"userExist": "用户已存在"
+		}
+	},
+	"validation": {
+		"baseMessage": "无效的{identifier} {details}",
+		"details": {
+			"invalidInput": "无效输入",
+			"notEmail": " 不是有效的电子邮件",
+			"wrongLength": "长度无效，预期为{min} ~ {max}"
+		}
 	}
 }
