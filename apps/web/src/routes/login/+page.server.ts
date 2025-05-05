@@ -36,7 +36,7 @@ export const actions: Actions = {
 
 			const existingUser = results.at(0);
 			if (!existingUser) {
-				return fail(400, { message: 'Incorrect username or password' });
+				return fail(400, { message: m['action.login.userNotFoundByUserName']() });
 			}
 
 			const validPassword = await verify(existingUser.passwordHash, password, {
@@ -46,7 +46,7 @@ export const actions: Actions = {
 				parallelism: 1
 			});
 			if (!validPassword) {
-				return fail(400, { message: 'Incorrect username or password' });
+				return fail(400, { message: m['action.login.failVerifyingPassword']() });
 			}
 
 			const sessionToken = auth.generateSessionToken();

@@ -74,6 +74,10 @@
 			"invalidPassword": "Passwort",
 			"finalCatchMessage": "Ein Fehler ist aufgetreten: {err}",
 			"userExist": "Benutzer existiert bereits"
+		},
+		"login": {
+			"userNotFoundByUserName": "Benutzer konnte nicht gefunden werden. Ist der Benutzername korrekt?",
+			"failVerifyingPassword": "Falscher Benutzername oder falsches Passwort"
 		}
 	},
 	"validation": {

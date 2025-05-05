@@ -74,6 +74,10 @@
 			"invalidPassword": "密碼",
 			"finalCatchMessage": "發生錯誤： {err}",
 			"userExist": "用戶已存在"
+		},
+		"login": {
+			"userNotFoundByUserName": "找不到用戶。使用者名稱正確嗎？",
+			"failVerifyingPassword": "使用者名稱或密碼不正確"
 		}
 	},
 	"validation": {

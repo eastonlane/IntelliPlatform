@@ -74,6 +74,10 @@
 			"invalidPassword": "密码",
 			"finalCatchMessage": "发生错误： {err}",
 			"userExist": "用户已存在"
+		},
+		"login": {
+			"userNotFoundByUserName": "找不到用户。用户名正确吗？",
+			"failVerifyingPassword": "用户名或密码不正确"
 		}
 	},
 	"validation": {
