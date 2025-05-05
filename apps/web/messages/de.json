@@ -7,7 +7,6 @@
 		"tableHeader": {
 			"device_name": "Gerätename",
 			"group_name": "Gerätegruppe",
-			"belonger": "Schöpfer",
 			"last_online_time": "Letzte Online-Zeit",
 			"register_time": "Registrierungszeit",
 			"add_device": "Gerät hinzufügen"
@@ -20,7 +19,7 @@
 		},
 		"tableActions": {
 			"deleteDevice": "Löschen",
-			"checkInfo": "Info"
+			"checkInfo": "Details"
 		},
 		"deviceInfoFrom": {
 			"deviceIdLabel": "Geräte-ID",

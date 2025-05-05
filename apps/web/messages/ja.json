@@ -7,7 +7,6 @@
 		"tableHeader": {
 			"device_name": "デバイス名",
 			"group_name": "デバイスグループ",
-			"belonger": "クリエイター",
 			"last_online_time": "最終オンライン時間",
 			"register_time": "登録時間",
 			"add_device": "デバイスを追加"
@@ -20,7 +19,7 @@
 		},
 		"tableActions": {
 			"deleteDevice": "消去",
-			"checkInfo": "情報"
+			"checkInfo": "詳細"
 		},
 		"deviceInfoFrom": {
 			"deviceIdLabel": "デバイスID",

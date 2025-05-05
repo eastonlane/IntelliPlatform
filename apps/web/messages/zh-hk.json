@@ -7,8 +7,7 @@
 		"tableHeader": {
 			"device_name": "設備名稱",
 			"group_name": "設備組",
-			"belonger": "創造者",
-			"last_online_time": "最新線上時間",
+			"last_online_time": "最晚在線時間",
 			"register_time": "註冊時間",
 			"add_device": "新增設備"
 		},
@@ -20,7 +19,7 @@
 		},
 		"tableActions": {
 			"deleteDevice": "刪除",
-			"checkInfo": "資訊"
+			"checkInfo": "詳情"
 		},
 		"deviceInfoFrom": {
 			"deviceIdLabel": "設備 ID",

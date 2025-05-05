@@ -7,8 +7,7 @@
 		"tableHeader": {
 			"device_name": "设备名称",
 			"group_name": "设备组",
-			"belonger": "创造者",
-			"last_online_time": "最晚在线时间",
+			"last_online_time": "最新在线时间",
 			"register_time": "注册时间",
 			"add_device": "添加设备"
 		},
@@ -20,7 +19,7 @@
 		},
 		"tableActions": {
 			"deleteDevice": "删除",
-			"checkInfo": "信息"
+			"checkInfo": "详情"
 		},
 		"deviceInfoFrom": {
 			"deviceIdLabel": "设备 ID",

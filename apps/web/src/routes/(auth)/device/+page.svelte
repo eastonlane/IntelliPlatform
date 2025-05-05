@@ -129,12 +129,9 @@
 				<Button on:click={() => (defaultModal = true)}>
 					<PlusOutline class="mr-2 h-3.5 w-3.5" />{m['device.addDevice']()}
 				</Button>
-				<Button color="alternative">Actions<ChevronDownOutline class="ml-2 h-3 w-3" /></Button>
-				<Dropdown class="w-44 divide-y divide-gray-100">
-					<DropdownItem on:click={deleteSelected} disabled={!isAnySelected}
-						>{m['device.tableActions.deleteDevice']()}
-					</DropdownItem>
-				</Dropdown>
+				<Button on:click={deleteSelected} disabled={!isAnySelected} color="red"
+					>{m['device.tableActions.deleteDevice']()}
+				</Button>
 				{#if defaultModal}
 					<NewDevice
 						bind:defaultModal
