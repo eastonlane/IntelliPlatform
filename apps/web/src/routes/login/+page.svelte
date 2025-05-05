@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import { middleContainerClassString } from '$lib/sylte';
 	import * as m from '$lib/paraglide/messages';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let { form }: { form: ActionData } = $props();
 	let callerMessage = $derived(page.url.searchParams.get('message'));
@@ -46,7 +47,7 @@
 		<div class="flex flex-row">
 			<Checkbox>{m['login.remember']()}</Checkbox>
 			<a
-				href="/forgePassword"
+				href={localizeHref('/forgePassword')}
 				class="text-primary-700 dark:text-primary-500 ms-auto text-sm hover:underline"
 			>
 				{m['login.lost_password']()}
@@ -55,7 +56,10 @@
 		<Button type="submit" class="w-full1">{m['login.submit']()}</Button>
 		<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
 			{m['login.noAccount']()}
-			<a href="/register" class="text-primary-700 dark:text-primary-500 hover:underline">
+			<a
+				href={localizeHref('/register')}
+				class="text-primary-700 dark:text-primary-500 hover:underline"
+			>
 				{m['login.createAccount']()}
 			</a>
 		</div>
