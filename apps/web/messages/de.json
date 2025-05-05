@@ -64,5 +64,8 @@
 		"logout": "Ausloggen",
 		"signUp": "Registrieren"
 	},
-	"redirectToLoginDefaultMessage": "Sie müssen angemeldet sein, um auf diese Seite zugreifen zu können"
+	"redirectToLoginDefaultMessage": "Sie müssen angemeldet sein, um auf diese Seite zugreifen zu können",
+	"server": {
+		"unauthenticated": "Authentifizierung erforderlich"
+	}
 }

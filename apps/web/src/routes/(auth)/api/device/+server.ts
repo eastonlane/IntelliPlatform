@@ -1,15 +1,17 @@
 import type { SearchPaginationDto } from '$lib/model/Pagination';
 import { device, type DeviceDO } from '@dal/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
-import { and } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { count, ilike, inArray, isNull } from 'drizzle-orm';
 import { v4 as uuidv4, validate } from 'uuid';
-import { env } from '$env/dynamic/private'
+import { env } from '$env/dynamic/private';
 import DbLoader from '@dal';
+import { ensureAuthenticated } from '$lib/helper/authHelper';
 
 const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
 
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ url, locals }) => {
+	ensureAuthenticated(locals);
 	const params = url.searchParams;
 	const paging: SearchPaginationDto<DeviceDO> = {
 		searchTerm: null,
@@ -24,19 +26,21 @@ export const GET: RequestHandler = async ({ url }) => {
 	paging.pageCount = Math.floor(paging.total / paging.pageSize + 1);
 	paging.searchTerm = params.get('searchTerm') ?? null;
 
-	const filters = [isNull(device.deleted_at)];
+	const filters = [isNull(device.deleted_at), eq(device.userId, locals.user.id)];
 	if (paging.searchTerm) {
 		filters.push(ilike(device.name, `%${paging.searchTerm}%`));
 	}
 
-	paging.items = await dbLoader.getDb()
+	paging.items = await dbLoader
+		.getDb()
 		.select()
 		.from(device)
 		.where(and(...filters))
 		.limit(paging.pageSize)
 		.offset(paging.page - 1);
 
-	const countResult = await dbLoader.getDb()
+	const countResult = await dbLoader
+		.getDb()
 		.select({ count: count() })
 		.from(device)
 		.where(and(...filters));
@@ -44,15 +48,20 @@ export const GET: RequestHandler = async ({ url }) => {
 	return json(paging);
 };
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, locals }) => {
+	ensureAuthenticated(locals);
 	const { name } = await request.json();
 
-	await dbLoader.getDb().insert(device).values({ name: name, id: uuidv4() });
+	const result = await dbLoader
+		.getDb()
+		.insert(device)
+		.values({ name: name, id: uuidv4(), userId: locals.user.id });
 
-	return json({ ok: true });
+	return json({ ok: !!result.length });
 };
 
-export const DELETE: RequestHandler = async ({ request }) => {
+export const DELETE: RequestHandler = async ({ request, locals }) => {
+	ensureAuthenticated(locals);
 	const deviceIdList: string[] = await request.json();
 	if (!deviceIdList || deviceIdList.length === 0) {
 		return error(400, 'no device id');
@@ -62,7 +71,11 @@ export const DELETE: RequestHandler = async ({ request }) => {
 		return error(400, 'device id not valid');
 	}
 
-	await dbLoader.getDb().update(device).set({ deleted_at: new Date() }).where(inArray(device.id, deviceIdList));
+	const result = await dbLoader
+		.getDb()
+		.update(device)
+		.set({ deleted_at: new Date() })
+		.where(and(inArray(device.id, deviceIdList), eq(device.userId, locals.user.id)));
 
-	return json({ ok: true });
+	return json({ ok: !!result.length });
 };

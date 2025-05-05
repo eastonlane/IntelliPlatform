@@ -64,5 +64,8 @@
 		"logout": "Log out",
 		"signUp": "Register"
 	},
-	"redirectToLoginDefaultMessage": "You must be logged in to access this page"
+	"redirectToLoginDefaultMessage": "You must be logged in to access this page",
+	"server": {
+		"unauthenticated": "Need Authentication"
+	}
 }

@@ -64,5 +64,8 @@
 		"logout": "登出",
 		"signUp": "登记"
 	},
-	"redirectToLoginDefaultMessage": "您必须登录才能访问此页面"
+	"redirectToLoginDefaultMessage": "您必须登录才能访问此页面",
+	"server": {
+		"unauthenticated": "需要身份验证"
+	}
 }

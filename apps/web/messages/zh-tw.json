@@ -64,5 +64,8 @@
 		"logout": "登出",
 		"signUp": "登記"
 	},
-	"redirectToLoginDefaultMessage": "您必須登入才能存取此頁面"
+	"redirectToLoginDefaultMessage": "您必須登入才能存取此頁面",
+	"server": {
+		"unauthenticated": "需要身份驗證"
+	}
 }
