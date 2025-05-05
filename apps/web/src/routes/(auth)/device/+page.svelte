@@ -38,7 +38,7 @@
 	let totalPages = $state(0);
 	let pageSize = $state(10);
 	let totalCount = $state(0);
-	let startRange = $derived.by(() => (currentPage - 1) * pageSize + 1);
+	let startRange = $derived.by(() => (totalCount ? (currentPage - 1) * pageSize + 1 : 0));
 	let endRange = $derived.by(() => Math.min(totalCount, currentPage * pageSize));
 	let pagesToShow: Array<number> = $derived.by(() =>
 		new Array(5).map((_, i) => i - 2 + currentPage).filter((x) => x > 0)
