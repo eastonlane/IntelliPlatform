@@ -23,6 +23,7 @@ export default class DbLoader {
   constructor(private dbUrl: string) {}
 
   getDb() {
+    if (!!db) return db;
     return createDbConnection(this.dbUrl);
   }
 }
