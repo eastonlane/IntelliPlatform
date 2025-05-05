@@ -1,8 +1,9 @@
 import type { RequestEvent } from '@sveltejs/kit';
+import * as m from '$lib/paraglide/messages';
 
 export default function handleLoginRedirect(
 	event: RequestEvent,
-	message: string = 'You must be logged in to access this page'
+	message: string = m.redirectToLoginDefaultMessage()
 ) {
 	const redirectTo = event.url.pathname + event.url.search;
 	return `/login?redirectTo=${redirectTo}&message=${message}`;

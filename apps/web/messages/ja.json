@@ -63,5 +63,6 @@
 		"login": "ログイン",
 		"logout": "ログアウト",
 		"signUp": "登録する"
-	}
+	},
+	"redirectToLoginDefaultMessage": "このページにアクセスするにはログインする必要があります"
 }

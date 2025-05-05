@@ -6,7 +6,7 @@
 	import * as m from '$lib/paraglide/messages';
 
 	let { form }: { form: ActionData } = $props();
-	const callerMessage = page.url.searchParams.get('message');
+	let callerMessage = $derived(page.url.searchParams.get('message'));
 </script>
 
 <div class={middleContainerClassString}>

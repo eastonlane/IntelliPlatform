@@ -63,5 +63,6 @@
 		"login": "Einloggen",
 		"logout": "Ausloggen",
 		"signUp": "Registrieren"
-	}
+	},
+	"redirectToLoginDefaultMessage": "Sie müssen angemeldet sein, um auf diese Seite zugreifen zu können"
 }

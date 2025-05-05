@@ -63,5 +63,6 @@
 		"login": "Log in",
 		"logout": "Log out",
 		"signUp": "Register"
-	}
+	},
+	"redirectToLoginDefaultMessage": "You must be logged in to access this page"
 }
