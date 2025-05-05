@@ -35,7 +35,12 @@
 	</NavBrand>
 	<NavHamburger />
 	<NavUl bind:activeUrl>
-		<NavLi href={PruneSuffix(localizeHref('/'), '/')}>{m.topBar_home()}</NavLi>
+		<NavLi
+			href={(() => {
+				const localizedHref = localizeHref('/');
+				return localizedHref === '/' ? '/' : PruneSuffix(localizedHref, '/');
+			})()}>{m.topBar_home()}</NavLi
+		>
 		<NavLi href={localizeHref('/device')}>{m.topBar_devices()}</NavLi>
 		<NavLi href={localizeHref('/data')}>{m.topBar_data()}</NavLi>
 	</NavUl>
