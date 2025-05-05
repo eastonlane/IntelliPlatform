@@ -40,7 +40,7 @@
 		<NavLi href={localizeHref('/device', { locale: currentLocale })}
 			>{m.topBar_devices()}</NavLi
 		>
-		<NavLi href={localizeHref('/Data', { locale: currentLocale })}
+		<NavLi href={localizeHref('/data', { locale: currentLocale })}
 			>{m.topBar_data()}</NavLi
 		>
 	</NavUl>

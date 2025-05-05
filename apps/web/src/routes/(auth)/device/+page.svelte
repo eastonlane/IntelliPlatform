@@ -105,7 +105,6 @@
 	let deviceBeingChecked = $state<DeviceDO>();
 
 	const refreshData = () => {
-		console.log(123);
 		goToPage(currentPage);
 	};
 

@@ -3,7 +3,6 @@ const baseUrl = PruneSuffix(import.meta.env.BASE_URL, '/');
 
 const fetchWrapper = (endpoint: string, options = {}) => {
 	const url = `${baseUrl}/${PrunePrefix(endpoint, '/')}`;
-	console.log(url);
 	const defaultOptions = {
 		headers: {
 			'Content-Type': 'application/json'
