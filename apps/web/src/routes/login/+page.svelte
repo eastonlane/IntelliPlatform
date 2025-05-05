@@ -11,7 +11,7 @@
 </script>
 
 <div class={middleContainerClassString}>
-	{#if callerMessage}
+	{#if !form?.message && callerMessage}
 		<Alert>
 			<span class="red font-medium">
 				{callerMessage}
