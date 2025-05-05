@@ -34,7 +34,6 @@ export const actions: Actions = {
 				.from(userTable)
 				.where(eq(userTable.name, username));
 
-			console.log(results);
 			const existingUser = results.at(0);
 			if (!existingUser) {
 				return fail(400, { message: 'Incorrect username or password' });
