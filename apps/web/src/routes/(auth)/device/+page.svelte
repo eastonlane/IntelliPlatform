@@ -22,7 +22,7 @@
 	} from 'flowbite-svelte-icons';
 	import { type DeviceDO } from '@dal/schema/device';
 	import { type PaginationDto } from '$lib/model/Pagination';
-	import fetchWrapper from '../../request';
+	import fetchWrapper from '../../../request';
 	import NewDevice from './NewDevice.svelte';
 	import DeviceInfo from './DeviceInfo.svelte';
 
@@ -38,7 +38,7 @@
 	let totalPages = $state(0);
 	let pageSize = $state(10);
 	let totalCount = $state(0);
-	let startRange = $derived.by(() => (currentPage - 1) * pageSize + 1);
+	let startRange = $derived.by(() => (totalCount ? (currentPage - 1) * pageSize + 1 : 0));
 	let endRange = $derived.by(() => Math.min(totalCount, currentPage * pageSize));
 	let pagesToShow: Array<number> = $derived.by(() =>
 		new Array(5).map((_, i) => i - 2 + currentPage).filter((x) => x > 0)
@@ -105,7 +105,6 @@
 	let deviceBeingChecked = $state<DeviceDO>();
 
 	const refreshData = () => {
-		console.log(123);
 		goToPage(currentPage);
 	};
 
@@ -130,12 +129,9 @@
 				<Button on:click={() => (defaultModal = true)}>
 					<PlusOutline class="mr-2 h-3.5 w-3.5" />{m['device.addDevice']()}
 				</Button>
-				<Button color="alternative">Actions<ChevronDownOutline class="ml-2 h-3 w-3" /></Button>
-				<Dropdown class="w-44 divide-y divide-gray-100">
-					<DropdownItem on:click={deleteSelected} disabled={!isAnySelected}
-						>{m['device.tableActions.deleteDevice']()}
-					</DropdownItem>
-				</Dropdown>
+				<Button on:click={deleteSelected} disabled={!isAnySelected} color="red"
+					>{m['device.tableActions.deleteDevice']()}
+				</Button>
 				{#if defaultModal}
 					<NewDevice
 						bind:defaultModal

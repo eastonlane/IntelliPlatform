@@ -1,14 +1,13 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"topBar_home": "Home",
+	"topBar_home": "Home Page",
 	"topBar_devices": "Devices",
 	"topBar_data": "Data",
 	"device": {
 		"tableHeader": {
 			"device_name": "Device Name",
-			"group_name": "Group",
-			"belonger": "Creator",
-			"last_online_time": "Last Online Time",
+			"group_name": "Device Group",
+			"last_online_time": "Latest Online Time",
 			"register_time": "Register Time",
 			"add_device": "Add Device"
 		},
@@ -20,7 +19,7 @@
 		},
 		"tableActions": {
 			"deleteDevice": "Delete",
-			"checkInfo": "Info"
+			"checkInfo": "Details"
 		},
 		"deviceInfoFrom": {
 			"deviceIdLabel": "Device Id",
@@ -30,5 +29,62 @@
 			"formTitile": "Device Info"
 		}
 	},
-	"topBar_profile": "Profile"
+	"login": {
+		"title": "Sign in to our platform",
+		"username": "User name",
+		"password": "Your password",
+		"remember": "Remember me",
+		"forgot": "Lost password?",
+		"submit": "Login to your account",
+		"noAccount": "Not registered?",
+		"createAccount": "Create account",
+		"username_placeholder": "Your name",
+		"password_placeholder": "•••••",
+		"sign_in_to_platform": "Sign in to our platform",
+		"lost_password": "Lost password?",
+		"login_button": "Login to your account",
+		"not_registered": "Not registered?",
+		"create_account": "Create account"
+	},
+	"register": {
+		"title": "Sign up in our platform",
+		"username": "User name",
+		"password": "Your password",
+		"passwordAgain": "Your password again",
+		"submit": "Create account",
+		"hasAccount": "Already have an account?",
+		"login": "Login",
+		"username_placeholder": "Your name",
+		"password_placeholder": "•••••"
+	},
+	"topBar": {
+		"profileDropdownButton": "Profiles",
+		"login": "Log in",
+		"logout": "Log out",
+		"signUp": "Register"
+	},
+	"redirectToLoginDefaultMessage": "You must be logged in to access this page",
+	"server": {
+		"unauthenticated": "Need Authentication"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "username",
+			"invalidPassword": "password",
+			"finalCatchMessage": "An error has occurred: {err}",
+			"userExist": "User already exist"
+		},
+		"login": {
+			"userNotFoundByUserName": "Cannot find user. Is user name correct?",
+			"failVerifyingPassword": "Incorrect username or password"
+		}
+	},
+	"validation": {
+		"baseMessage": "Invalid {identifier} {details}",
+		"details": {
+			"invalidInput": "invalid input",
+			"notEmail": " is not a valid email",
+			"wrongLength": "invalid length, expected {min}~{max}"
+		}
+	}
 }

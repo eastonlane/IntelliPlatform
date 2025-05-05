@@ -1,4 +1,90 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from zh-cn!"
+	"topBar_home": "主页",
+	"topBar_devices": "设备",
+	"topBar_data": "数据",
+	"device": {
+		"tableHeader": {
+			"device_name": "设备名称",
+			"group_name": "设备组",
+			"last_online_time": "最新在线时间",
+			"register_time": "注册时间",
+			"add_device": "添加设备"
+		},
+		"addDevice": "添加设备",
+		"addDeviceForm": {
+			"nameLabel": "设备名称",
+			"nameLabelPlaceHolder": "输入设备名称",
+			"submitButton": "添加新设备"
+		},
+		"tableActions": {
+			"deleteDevice": "删除",
+			"checkInfo": "详情"
+		},
+		"deviceInfoFrom": {
+			"deviceIdLabel": "设备 ID",
+			"deviceNameLable": "设备名称",
+			"deviceGroup": "设备组",
+			"submitButton": "编辑",
+			"formTitile": "设备信息"
+		}
+	},
+	"login": {
+		"title": "登录我们的平台",
+		"username": "用户名",
+		"password": "您的密码",
+		"remember": "记住账号",
+		"forgot": "忘记密码？",
+		"submit": "登录您的帐户",
+		"noAccount": "尚未注册？",
+		"createAccount": "创建账户",
+		"username_placeholder": "您的名字",
+		"password_placeholder": "•••••",
+		"sign_in_to_platform": "登录我们的平台",
+		"lost_password": "忘记密码？",
+		"login_button": "登录您的帐户",
+		"not_registered": "尚未注册？",
+		"create_account": "创建账户"
+	},
+	"register": {
+		"title": "在我们的平台上注册",
+		"username": "用户名",
+		"password": "您的密码",
+		"passwordAgain": "再次输入您的密码",
+		"submit": "创建账户",
+		"hasAccount": "已有账户？",
+		"login": "登录",
+		"username_placeholder": "您的名字",
+		"password_placeholder": "•••••"
+	},
+	"topBar": {
+		"login": "登录",
+		"logout": "登出",
+		"signUp": "登记",
+		"profileDropdownButton": "个人资料"
+	},
+	"redirectToLoginDefaultMessage": "您必须登录才能访问此页面",
+	"server": {
+		"unauthenticated": "需要身份验证"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "用户名",
+			"invalidPassword": "密码",
+			"finalCatchMessage": "发生错误： {err}",
+			"userExist": "用户已存在"
+		},
+		"login": {
+			"userNotFoundByUserName": "找不到用户。用户名正确吗？",
+			"failVerifyingPassword": "用户名或密码不正确"
+		}
+	},
+	"validation": {
+		"baseMessage": "无效的{identifier} {details}",
+		"details": {
+			"invalidInput": "无效输入",
+			"notEmail": " 不是有效的电子邮件",
+			"wrongLength": "长度无效，预期为{min} ~ {max}"
+		}
+	}
 }

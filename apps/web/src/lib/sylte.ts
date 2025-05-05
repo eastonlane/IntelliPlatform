@@ -1,0 +1,1 @@
+export const middleContainerClassString = 'flex flex-col mx-auto w-full gap-4 max-w-2xl md:w-[80%]'
