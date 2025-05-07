@@ -86,5 +86,16 @@
 			"notEmail": " ist keine gültige E-Mail",
 			"wrongLength": "ungültige Länge, erwartet {min} ~ {max}"
 		}
+	},
+	"components": {
+		"timeRange": {
+			"options": {
+				"today": "Heute",
+				"yesterday": "Gestern",
+				"last3d": "Letzte 3 Tage",
+				"last7d": "Letzte 7 Tage",
+				"customRange": "Benutzerdefinierter Bereich"
+			}
+		}
 	}
 }
