@@ -86,5 +86,16 @@
 			"notEmail": " 有効なメールアドレスではありません",
 			"wrongLength": "長さが無効です。 {min} ～ {max}"
 		}
+	},
+	"components": {
+		"timeRange": {
+			"options": {
+				"today": "今日",
+				"yesterday": "昨日",
+				"last3d": "過去3日間",
+				"last7d": "過去7日間",
+				"customRange": "カスタム範囲"
+			}
+		}
 	}
 }

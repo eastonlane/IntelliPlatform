@@ -86,5 +86,16 @@
 			"notEmail": " 不是有效的电子邮件",
 			"wrongLength": "长度无效，预期为{min} ~ {max}"
 		}
+	},
+	"components": {
+		"timeRange": {
+			"options": {
+				"today": "今天",
+				"yesterday": "昨天",
+				"last3d": "过去 3 天",
+				"last7d": "过去 7 天",
+				"customRange": "自定义范围"
+			}
+		}
 	}
 }

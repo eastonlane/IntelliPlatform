@@ -86,5 +86,16 @@
 			"notEmail": " 不是有效的電子郵件",
 			"wrongLength": "長度無效，預期為{min} ~ {max}"
 		}
+	},
+	"components": {
+		"timeRange": {
+			"options": {
+				"today": "今天",
+				"yesterday": "昨天",
+				"last3d": "過去 3 天",
+				"last7d": "過去 7 天",
+				"customRange": "自訂範圍"
+			}
+		}
 	}
 }
