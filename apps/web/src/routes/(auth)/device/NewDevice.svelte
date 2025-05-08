@@ -7,7 +7,6 @@
 	let newDeviceName = $state('');
 
 	const handleNewDevice = async () => {
-		console.log(111);
 		fetchWrapper('/api/device', {
 			method: 'POST',
 			body: JSON.stringify({
