@@ -1,28 +1,115 @@
 <script lang="ts">
 	import DateRangeBar from '$lib/components/DateRangeBar.svelte';
 	import { type MetricsDO } from '@dal/schema/metrics';
-	import { metrics } from 'DAL/scheme';
 	import { Card, Chart } from 'flowbite-svelte';
-	import colors from 'tailwindcss/colors';
 
 	let timeRangeStart = $state(new Date());
 	let timeRangeEnd = $state(new Date());
 
-	let metricsList = $props<MetricsDO[]>();
+	type MetricsInSeriesType = {
+		x: number | string | Date;
+		y: number | null;
+	};
 
-    let series = $derived(
-			Array.prototype
-				.reduce((acc, item) => {
-					const key = item.name;
-					if (!acc[key]) {
-						acc[key] = [];
-					}
+	type SeriesType = {
+		name: string;
+		data: MetricsInSeriesType[];
+	};
 
-					acc[key].push(item);
-					return acc;
-				}, {})
-				.map()
-		)
+	const mockData = [
+		{
+			time: new Date('2025-05-08T08:00:00Z'),
+			name: 'temperature',
+			valueNumber: '22.3',
+			valueBool: null,
+			deviceId: 'device-123',
+			tagList: [{ name: 'unit', value: 'celsius' }],
+			fieldList: [{ name: 'location', value: 'lab-1' }]
+		},
+		{
+			time: new Date('2025-05-08T08:05:00Z'),
+			name: 'temperature',
+			valueNumber: '23.1',
+			valueBool: null,
+			deviceId: 'device-123',
+			tagList: [{ name: 'unit', value: 'celsius' }],
+			fieldList: [{ name: 'location', value: 'lab-1' }]
+		},
+		{
+			time: new Date('2025-05-08T08:10:00Z'),
+			name: 'temperature',
+			valueNumber: '24.0',
+			valueBool: null,
+			deviceId: 'device-123',
+			tagList: [{ name: 'unit', value: 'celsius' }],
+			fieldList: [{ name: 'location', value: 'lab-1' }]
+		},
+		{
+			time: new Date('2025-05-08T08:00:00Z'),
+			name: 'door_open',
+			valueNumber: null,
+			valueBool: true,
+			deviceId: 'device-456',
+			tagList: [{ name: 'zone', value: 'A' }],
+			fieldList: null
+		},
+		{
+			time: new Date('2025-05-08T08:01:00Z'),
+			name: 'door_open',
+			valueNumber: null,
+			valueBool: false,
+			deviceId: 'device-456',
+			tagList: [{ name: 'zone', value: 'A' }],
+			fieldList: null
+		},
+		{
+			time: new Date('2025-05-08T08:10:00Z'),
+			name: 'humidity',
+			valueNumber: '45.6',
+			valueBool: null,
+			deviceId: 'device-123',
+			tagList: [{ name: 'unit', value: '%' }],
+			fieldList: [{ name: 'sensor', value: 'BME280' }]
+		},
+		{
+			time: new Date('2025-05-08T08:15:00Z'),
+			name: 'humidity',
+			valueNumber: '47.2',
+			valueBool: null,
+			deviceId: 'device-123',
+			tagList: [{ name: 'unit', value: '%' }],
+			fieldList: [{ name: 'sensor', value: 'BME280' }]
+		},
+		{
+			time: new Date('2025-05-08T08:20:00Z'),
+			name: 'humidity',
+			valueNumber: '46.5',
+			valueBool: null,
+			deviceId: 'device-123',
+			tagList: [{ name: 'unit', value: '%' }],
+			fieldList: [{ name: 'sensor', value: 'BME280' }]
+		}
+	];
+
+	let metricsList = $state<MetricsDO[]>(mockData);
+
+	let series = $derived<SeriesType[]>(
+		Object.entries(
+			metricsList.reduce<Record<string, MetricsInSeriesType[]>>((acc, item) => {
+				if (!acc[item.name]) {
+					acc[item.name] = [];
+				}
+				acc[item.name].push({
+					x: item.time,
+					y: Number(item.valueNumber)
+				});
+				return acc;
+			}, {})
+		).map(([name, metricsList]) => ({
+			name: name,
+			data: metricsList
+		}))
+	);
 
 	let options: ApexCharts.ApexOptions = {
 		chart: {
@@ -58,19 +145,8 @@
 				top: -26
 			}
 		},
+		// svelte-ignore state_referenced_locally
 		series: series,
-		// [
-		// 	{
-		// 		name: 'Clicks',
-		// 		data: [6500, 6418, 6456, 6526, 6356, 6456],
-		// 		color: '#1A56DB'
-		// 	},
-		// 	{
-		// 		name: 'CPC',
-		// 		data: [6456, 6356, 6526, 6332, 6418, 6500],
-		// 		color: '#7E3AF2'
-		// 	}
-		// ],
 		legend: {
 			show: false
 		},
