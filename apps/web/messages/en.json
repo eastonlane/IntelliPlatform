@@ -97,5 +97,12 @@
 				"customRange": "Custom Rnage"
 			}
 		}
+	},
+	"data": {
+		"queryMetricsButton": "Query",
+		"deviceSelectBar": "Select Device(s)",
+		"emptyDeviceListIsProvided": "At least one device is required",
+		"wrongParamters": "wrong parameter(s)",
+		"noMetricsFound": "no data found"
 	}
 }

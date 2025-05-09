@@ -97,5 +97,12 @@
 				"customRange": "自定义范围"
 			}
 		}
+	},
+	"data": {
+		"queryMetricsButton": "询问",
+		"deviceSelectBar": "选择设备",
+		"emptyDeviceListIsProvided": "至少需要一台设备",
+		"wrongParamters": "错误参数",
+		"noMetricsFound": "未找到数据"
 	}
 }

@@ -97,5 +97,12 @@
 				"customRange": "自訂範圍"
 			}
 		}
+	},
+	"data": {
+		"queryMetricsButton": "詢問",
+		"deviceSelectBar": "選擇設備",
+		"emptyDeviceListIsProvided": "至少需要一台設備",
+		"wrongParamters": "錯誤參數",
+		"noMetricsFound": "未找到數據"
 	}
 }
