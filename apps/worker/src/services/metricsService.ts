@@ -5,7 +5,6 @@ import {
   type Tag,
   type Field,
 } from "@dal/schema/metrics";
-
 export default interface MessageModel {
   metaData: MessageMetaData;
   payload: string;
@@ -27,7 +26,7 @@ export class MetricsService implements IMetricsService {
     this.dbLoader = new DbLoader(process.env.DATABASE_URL!);
   }
   public async RecordMetrics(msg: MessageModel) {
-    const properties = JSON.parse(msg.payload);
+    const properties = msg.payload;
     const metricsList: MetricsDO[] = [];
     const time = new Date();
 

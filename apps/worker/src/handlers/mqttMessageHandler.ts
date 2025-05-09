@@ -21,8 +21,8 @@ export const OnReceivingMessage: mqtt.OnMessageCallback = async (
     payload: payload.props,
     metaData: {
       deviceId: deviceId,
-      tags: payload.tags.map(keyValueParser).filter((x) => !!x),
-      fields: payload.fields.map(keyValueParser).filter((x) => !!x),
+      tags: payload?.tags?.map(keyValueParser)?.filter((x) => !!x) ?? [],
+      fields: payload?.fields?.map(keyValueParser)?.filter((x) => !!x) ?? [],
     },
   });
 };
@@ -43,6 +43,6 @@ function keyValueParser(str: string): { name: string; value: string } | null {
 
 interface MqttMessagePayload {
   props: string;
-  tags: string[];
-  fields: string[];
+  tags: string[] | null;
+  fields: string[] | null;
 }
