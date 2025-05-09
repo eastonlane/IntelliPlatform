@@ -1,10 +1,17 @@
 <script lang="ts">
 	import DateRangeBar from '$lib/components/DateRangeBar.svelte';
+	import { m } from '$lib/paraglide/messages';
 	import { type MetricsDO } from '@dal/schema/metrics';
-	import { Card, Chart } from 'flowbite-svelte';
+	import { Alert, Button, Card, Chart, MultiSelect, WidgetPlaceholder } from 'flowbite-svelte';
+	import type { ActionData, PageServerData } from './$types';
 
-	let timeRangeStart = $state(new Date());
+	let timeRangeBegin = $state(new Date());
 	let timeRangeEnd = $state(new Date());
+
+	let { data, form }: { form: ActionData; data: PageServerData } = $props();
+	const deviceList = data.deviceList;
+
+	let selectedDeviceIdList = $state<string[]>([]);
 
 	type MetricsInSeriesType = {
 		x: number | string | Date;
@@ -16,82 +23,7 @@
 		data: MetricsInSeriesType[];
 	};
 
-	const mockData = [
-		{
-			time: new Date('2025-05-08T08:00:00Z'),
-			name: 'temperature',
-			valueNumber: '22.3',
-			valueBool: null,
-			deviceId: 'device-123',
-			tagList: [{ name: 'unit', value: 'celsius' }],
-			fieldList: [{ name: 'location', value: 'lab-1' }]
-		},
-		{
-			time: new Date('2025-05-08T08:05:00Z'),
-			name: 'temperature',
-			valueNumber: '23.1',
-			valueBool: null,
-			deviceId: 'device-123',
-			tagList: [{ name: 'unit', value: 'celsius' }],
-			fieldList: [{ name: 'location', value: 'lab-1' }]
-		},
-		{
-			time: new Date('2025-05-08T08:10:00Z'),
-			name: 'temperature',
-			valueNumber: '24.0',
-			valueBool: null,
-			deviceId: 'device-123',
-			tagList: [{ name: 'unit', value: 'celsius' }],
-			fieldList: [{ name: 'location', value: 'lab-1' }]
-		},
-		{
-			time: new Date('2025-05-08T08:00:00Z'),
-			name: 'door_open',
-			valueNumber: null,
-			valueBool: true,
-			deviceId: 'device-456',
-			tagList: [{ name: 'zone', value: 'A' }],
-			fieldList: null
-		},
-		{
-			time: new Date('2025-05-08T08:01:00Z'),
-			name: 'door_open',
-			valueNumber: null,
-			valueBool: false,
-			deviceId: 'device-456',
-			tagList: [{ name: 'zone', value: 'A' }],
-			fieldList: null
-		},
-		{
-			time: new Date('2025-05-08T08:10:00Z'),
-			name: 'humidity',
-			valueNumber: '45.6',
-			valueBool: null,
-			deviceId: 'device-123',
-			tagList: [{ name: 'unit', value: '%' }],
-			fieldList: [{ name: 'sensor', value: 'BME280' }]
-		},
-		{
-			time: new Date('2025-05-08T08:15:00Z'),
-			name: 'humidity',
-			valueNumber: '47.2',
-			valueBool: null,
-			deviceId: 'device-123',
-			tagList: [{ name: 'unit', value: '%' }],
-			fieldList: [{ name: 'sensor', value: 'BME280' }]
-		},
-		{
-			time: new Date('2025-05-08T08:20:00Z'),
-			name: 'humidity',
-			valueNumber: '46.5',
-			valueBool: null,
-			deviceId: 'device-123',
-			tagList: [{ name: 'unit', value: '%' }],
-			fieldList: [{ name: 'sensor', value: 'BME280' }]
-		}
-	];
-
-	let metricsList = $state<MetricsDO[]>(mockData);
+	let metricsList = $derived<MetricsDO[]>(form?.metricsList ?? []);
 
 	let series = $derived<SeriesType[]>(
 		Object.entries(
@@ -151,7 +83,7 @@
 			show: false
 		},
 		xaxis: {
-			categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
+			// categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
 			labels: {
 				show: true,
 				style: {
@@ -172,11 +104,47 @@
 	};
 </script>
 
-<div class="px-4 py-4">
-	<Card>
-		<div>
-			<DateRangeBar {timeRangeStart} {timeRangeEnd} />
+<div class="flex flex-col justify-start gap-8 px-4 py-4">
+	<div>
+		{#if form?.err}
+			<Alert>
+				<span class="red font-sans font-bold">
+					{form.err}
+				</span>
+			</Alert>
+		{/if}
+	</div>
+
+	<Card class="max-h-full max-w-full">
+		<div class="flex flex-row flex-wrap justify-between p-6">
+			<DateRangeBar timeRangeStart={timeRangeBegin} {timeRangeEnd} />
+
+			<MultiSelect
+				required
+				class="min-w-[16rem]"
+				placeholder={m['data.deviceSelectBar']()}
+				items={deviceList.map((x) => ({ value: x.id, name: x.name }))}
+				bind:value={selectedDeviceIdList}
+			/>
+
+			<form method="POST" action="?/getMetrics">
+				<input type="hidden" name="rangeBegin" bind:value={timeRangeBegin} />
+				<input type="hidden" name="rangeEnd" bind:value={timeRangeEnd} />
+				{#each selectedDeviceIdList as deviceId, index (index)}
+					<input type="hidden" name="deviceId" value={deviceId} />
+				{/each}
+				<Button disabled={!selectedDeviceIdList.length} type="submit"
+					>{m['data.queryMetricsButton']()}</Button
+				>
+			</form>
 		</div>
-		<Chart {options} />
+
+		<div class="px-8">
+			{#if metricsList.length}
+				<Chart {options} />
+			{:else}
+				<WidgetPlaceholder class="max-w-full" />
+			{/if}
+		</div>
 	</Card>
 </div>

@@ -97,5 +97,12 @@
 				"customRange": "Benutzerdefinierter Bereich"
 			}
 		}
+	},
+	"data": {
+		"queryMetricsButton": "Abfrage",
+		"deviceSelectBar": "Gerät(e) auswählen",
+		"emptyDeviceListIsProvided": "Mindestens ein Gerät ist erforderlich",
+		"wrongParamters": "falsche(r) Parameter",
+		"noMetricsFound": "keine Daten gefunden"
 	}
 }

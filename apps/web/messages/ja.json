@@ -97,5 +97,12 @@
 				"customRange": "カスタム範囲"
 			}
 		}
+	},
+	"data": {
+		"queryMetricsButton": "クエリ",
+		"deviceSelectBar": "デバイスを選択",
+		"emptyDeviceListIsProvided": "少なくとも1つのデバイスが必要です",
+		"wrongParamters": "間違ったパラメータ",
+		"noMetricsFound": "データが見つかりません"
 	}
 }
