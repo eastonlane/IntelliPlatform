@@ -117,7 +117,7 @@
 
 	<Card class="max-h-full max-w-full">
 		<div class="flex flex-row flex-wrap justify-between p-6">
-			<DateRangeBar timeRangeStart={timeRangeBegin} {timeRangeEnd} />
+			<DateRangeBar bind:timeRangeBegin bind:timeRangeEnd />
 
 			<MultiSelect
 				required

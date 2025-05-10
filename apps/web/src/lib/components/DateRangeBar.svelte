@@ -6,11 +6,11 @@
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 
 	let {
-		timeRangeStart = $bindable<Date>(),
+		timeRangeBegin = $bindable<Date>(),
 		timeRangeEnd = $bindable<Date>(),
 		timeRangeOptions
 	}: {
-		timeRangeStart: Date;
+		timeRangeBegin: Date;
 		timeRangeEnd: Date;
 		timeRangeOptions?: ITimeRange[];
 	} = $props();
@@ -85,7 +85,7 @@
 		{#each timeRangeOptions as { name: optionName, timeRangeCalculator }, index (optionName)}
 			<DropdownItem
 				on:click={() => {
-					({ from: timeRangeStart, to: timeRangeEnd } = timeRangeCalculator(new Date()));
+					({ from: timeRangeBegin, to: timeRangeEnd } = timeRangeCalculator(new Date()));
 					selectedTimeRangeIndex = index;
 				}}
 			>
@@ -97,7 +97,7 @@
 	<div class="inline-block min-w-[16rem] pr-6">
 		<Datepicker
 			range={true}
-			bind:rangeFrom={timeRangeStart}
+			bind:rangeFrom={timeRangeBegin}
 			bind:rangeTo={timeRangeEnd}
 			locale={getLocale()}
 			on:select={() => {
