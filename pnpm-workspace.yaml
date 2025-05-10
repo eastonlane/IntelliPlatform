@@ -1,11 +1,12 @@
 packages:
-  # all packages in direct subdirs of packages/ and apps
-  - "packages/*"
-  - "apps/**"
-  # exclude packages that are inside test directories
-  - "!**/test/**"
+  - packages/*
+  - apps/**
+  - '!**/test/**'
+
 syncInjectedDepsAfterScripts:
-- build
+  - build
+
 injectWorkspacePackages: true
+
 onlyBuiltDependencies:
-  - esbuild"
+  - "esbuild"

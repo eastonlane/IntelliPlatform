@@ -12,6 +12,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
+		"translate": "pnpm inlang machine translate --project .\\project.inlang --locale en",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build"
 	},
@@ -61,6 +62,8 @@
 		"flowbite-svelte-blocks": "^2.0.0",
 		"flowbite-svelte-icons": "^2.1.1",
 		"loadsh": "^0.0.4",
+		"pino": "^9.6.0",
+		"pino-pretty": "^13.0.0",
 		"uuid": "^11.1.0"
 	}
 }

@@ -1,9 +1,12 @@
 import { PruneSuffix, PrunePrefix } from '$lib/helper/url-helper';
-const baseUrl = PruneSuffix(import.meta.env.BASE_URL, '/');
+const baseUrl = normalizeBaseUrl(import.meta.env.BASE_URL);
+function normalizeBaseUrl(url: string): string {
+	if (url === '/') return '';
+	return '/' + PrunePrefix(PruneSuffix(url, '/'), '/');
+}
 
 const fetchWrapper = (endpoint: string, options = {}) => {
 	const url = `${baseUrl}/${PrunePrefix(endpoint, '/')}`;
-	console.log(url);
 	const defaultOptions = {
 		headers: {
 			'Content-Type': 'application/json'

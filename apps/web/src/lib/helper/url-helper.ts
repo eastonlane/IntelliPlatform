@@ -7,7 +7,7 @@ export function PruneSuffix(text: string, suffix: string) {
 
 export function PrunePrefix(text: string, prefix: string) {
 	if (hasContent(prefix, WhitespaceMode.Preserve) && text?.startsWith(prefix)) {
-		return text.substring(prefix.length, text.length - prefix.length);
+		return text.substring(prefix.length, text.length);
 	}
 	return text;
 }

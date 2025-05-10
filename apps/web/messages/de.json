@@ -1,0 +1,108 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"topBar_home": "Startseite",
+	"topBar_devices": "Geräte",
+	"topBar_data": "Daten",
+	"device": {
+		"tableHeader": {
+			"device_name": "Gerätename",
+			"group_name": "Gerätegruppe",
+			"last_online_time": "Letzte Online-Zeit",
+			"register_time": "Registrierungszeit",
+			"add_device": "Gerät hinzufügen"
+		},
+		"addDevice": "Gerät hinzufügen",
+		"addDeviceForm": {
+			"nameLabel": "Gerätename",
+			"nameLabelPlaceHolder": "Geben Sie den Gerätenamen ein",
+			"submitButton": "Neues Gerät hinzufügen"
+		},
+		"tableActions": {
+			"deleteDevice": "Löschen",
+			"checkInfo": "Details"
+		},
+		"deviceInfoFrom": {
+			"deviceIdLabel": "Geräte-ID",
+			"deviceNameLable": "Gerätename",
+			"deviceGroup": "Gerätegruppe",
+			"submitButton": "Bearbeiten",
+			"formTitile": "Geräteinformationen"
+		}
+	},
+	"login": {
+		"title": "Melden Sie sich bei unserer Plattform an",
+		"username": "Benutzername",
+		"password": "Ihr Passwort",
+		"remember": "Erinnere dich an mich",
+		"forgot": "Passwort vergessen?",
+		"submit": "Einloggen auf Ihr Konto",
+		"noAccount": "Noch nicht registriert?",
+		"createAccount": "Benutzerkonto erstellen",
+		"username_placeholder": "Ihr Name",
+		"password_placeholder": "•••••",
+		"sign_in_to_platform": "Melden Sie sich bei unserer Plattform an",
+		"lost_password": "Passwort vergessen?",
+		"login_button": "Einloggen auf Ihr Konto",
+		"not_registered": "Noch nicht registriert?",
+		"create_account": "Benutzerkonto erstellen"
+	},
+	"register": {
+		"title": "Registrieren Sie sich auf unserer Plattform",
+		"username": "Benutzername",
+		"password": "Ihr Passwort",
+		"passwordAgain": "Ihr Passwort erneut",
+		"submit": "Benutzerkonto erstellen",
+		"hasAccount": "Hast du schon ein Konto?",
+		"login": "Login",
+		"username_placeholder": "Ihr Name",
+		"password_placeholder": "•••••"
+	},
+	"topBar": {
+		"login": "Einloggen",
+		"logout": "Ausloggen",
+		"signUp": "Registrieren",
+		"profileDropdownButton": "Profile"
+	},
+	"redirectToLoginDefaultMessage": "Sie müssen angemeldet sein, um auf diese Seite zugreifen zu können",
+	"server": {
+		"unauthenticated": "Authentifizierung erforderlich"
+	},
+	"action": {
+		"register": {
+			"invalidUserName": "Benutzername",
+			"invalidPassword": "Passwort",
+			"finalCatchMessage": "Ein Fehler ist aufgetreten: {err}",
+			"userExist": "Benutzer existiert bereits"
+		},
+		"login": {
+			"userNotFoundByUserName": "Benutzer konnte nicht gefunden werden. Ist der Benutzername korrekt?",
+			"failVerifyingPassword": "Falscher Benutzername oder falsches Passwort"
+		}
+	},
+	"validation": {
+		"baseMessage": "Ungültiger {identifier} {details}",
+		"details": {
+			"invalidInput": "ungültige Eingabe",
+			"notEmail": " ist keine gültige E-Mail",
+			"wrongLength": "ungültige Länge, erwartet {min} ~ {max}"
+		}
+	},
+	"components": {
+		"timeRange": {
+			"options": {
+				"today": "Heute",
+				"yesterday": "Gestern",
+				"last3d": "Letzte 3 Tage",
+				"last7d": "Letzte 7 Tage",
+				"customRange": "Benutzerdefinierter Bereich"
+			}
+		}
+	},
+	"data": {
+		"queryMetricsButton": "Abfrage",
+		"deviceSelectBar": "Gerät(e) auswählen",
+		"emptyDeviceListIsProvided": "Mindestens ein Gerät ist erforderlich",
+		"wrongParamters": "falsche(r) Parameter",
+		"noMetricsFound": "keine Daten gefunden"
+	}
+}
