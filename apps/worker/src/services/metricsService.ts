@@ -5,6 +5,9 @@ import {
   type Tag,
   type Field,
 } from "@dal/schema/metrics";
+import { device } from "@dal/schema/device";
+import { eq } from "drizzle-orm";
+import logger from "@worker/utils/logger";
 export default interface MessageModel {
   metaData: MessageMetaData;
   payload: string;
@@ -27,6 +30,19 @@ export class MetricsService implements IMetricsService {
   }
   public async RecordMetrics(msg: MessageModel) {
     const properties = msg.payload;
+
+    const anyResult = await this.dbLoader
+      .getDb()
+      .select({ id: device.id })
+      .from(device)
+      .where(eq(device.id, msg.metaData.deviceId))
+      .limit(1);
+
+    if (!anyResult.length) {
+      logger.info("unknow device id: %s", msg.metaData.deviceId);
+      return;
+    }
+
     const metricsList: MetricsDO[] = [];
     const time = new Date();
 
