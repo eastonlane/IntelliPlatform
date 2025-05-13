@@ -2,14 +2,14 @@
 	import DateRangeBar from '$lib/components/DateRangeBar.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { type MetricsDO } from '@dal/schema/metrics';
-	import { Alert, Button, Card, Chart, MultiSelect, WidgetPlaceholder } from 'flowbite-svelte';
-	import type { ActionData, PageServerData } from './$types';
+	import { Button, Card, Chart, MultiSelect, WidgetPlaceholder } from 'flowbite-svelte';
+	import fetchWrapper from '../../../request';
+	import toast, { Toaster } from 'svelte-french-toast';
 
 	let timeRangeBegin = $state(new Date());
 	let timeRangeEnd = $state(new Date());
 
-	let { data, form }: { form: ActionData; data: PageServerData } = $props();
-	const deviceList = data.deviceList;
+	let { data } = $props();
 
 	let selectedDeviceIdList = $state<string[]>([]);
 
@@ -23,7 +23,29 @@
 		data: MetricsInSeriesType[];
 	};
 
-	let metricsList = $derived<MetricsDO[]>(form?.metricsList ?? []);
+	let metricsList = $state<MetricsDO[]>([]);
+
+	function getMetrics() {
+		const queryParam = new URLSearchParams();
+		queryParam.append('rangeBegin', timeRangeBegin.toString());
+		queryParam.append('rangeEnd', timeRangeEnd.toString());
+		selectedDeviceIdList.forEach((deviceId) => {
+			queryParam.append('deviceId', deviceId);
+		});
+		fetchWrapper(`/api/data?${queryParam.toString()}`)
+			.then((resp) => {
+				const metricsFetched = resp.metricsList;
+				if (!metricsFetched?.length) {
+					toast.error(m['data.noMetricsFound']());
+					return;
+				}
+
+				metricsList = metricsFetched;
+			})
+			.catch((err) => {
+				toast.error(err);
+			});
+	}
 
 	let series = $derived<SeriesType[]>(
 		Object.entries(
@@ -43,7 +65,7 @@
 		}))
 	);
 
-	let options: ApexCharts.ApexOptions = {
+	let options: ApexCharts.ApexOptions = $derived({
 		chart: {
 			height: '400px',
 			type: 'line',
@@ -101,42 +123,29 @@
 		yaxis: {
 			show: false
 		}
-	};
+	});
 </script>
 
 <div class="flex flex-col justify-start gap-8 px-4 py-4">
-	<div>
-		{#if form?.err}
-			<Alert>
-				<span class="red font-sans font-bold">
-					{form.err}
-				</span>
-			</Alert>
-		{/if}
-	</div>
+	<Toaster />
 
 	<Card class="max-h-full max-w-full">
 		<div class="flex flex-row flex-wrap justify-between p-6">
 			<DateRangeBar bind:timeRangeBegin bind:timeRangeEnd />
 
-			<MultiSelect
-				required
-				class="min-w-[16rem]"
-				placeholder={m['data.deviceSelectBar']()}
-				items={deviceList.map((x) => ({ value: x.id, name: x.name }))}
-				bind:value={selectedDeviceIdList}
-			/>
+			{#await data.getDeviceList then deviceList}
+				<MultiSelect
+					required
+					class="min-w-[16rem]"
+					placeholder={m['data.deviceSelectBar']()}
+					items={deviceList.map((x) => ({ value: x.id, name: x.name }))}
+					bind:value={selectedDeviceIdList}
+				/>
+			{/await}
 
-			<form method="POST" action="?/getMetrics">
-				<input type="hidden" name="rangeBegin" bind:value={timeRangeBegin} />
-				<input type="hidden" name="rangeEnd" bind:value={timeRangeEnd} />
-				{#each selectedDeviceIdList as deviceId, index (index)}
-					<input type="hidden" name="deviceId" value={deviceId} />
-				{/each}
-				<Button disabled={!selectedDeviceIdList.length} type="submit"
-					>{m['data.queryMetricsButton']()}</Button
-				>
-			</form>
+			<Button disabled={!selectedDeviceIdList.length} on:click={getMetrics}
+				>{m['data.queryMetricsButton']()}</Button
+			>
 		</div>
 
 		<div class="px-8">

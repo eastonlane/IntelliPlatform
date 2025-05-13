@@ -54,6 +54,9 @@ importers:
       pino-pretty:
         specifier: ^13.0.0
         version: 13.0.0
+      svelte-french-toast:
+        specifier: ^1.2.0
+        version: 1.2.0(svelte@5.28.2)
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -3161,6 +3164,11 @@ packages:
       svelte:
         optional: true
 
+  svelte-french-toast@1.2.0:
+    resolution: {integrity: sha512-5PW+6RFX3xQPbR44CngYAP1Sd9oCq9P2FOox4FZffzJuZI2mHOB7q5gJBVnOiLF5y3moVGZ7u2bYt7+yPAgcEQ==}
+    peerDependencies:
+      svelte: ^3.57.0 || ^4.0.0
+
   svelte-preprocess@5.1.4:
     resolution: {integrity: sha512-IvnbQ6D6Ao3Gg6ftiM5tdbR6aAETwjhHV+UKGf5bHGYR69RQvF1ho0JKPcbUON4vy4R7zom13jPjgdOWCQ5hDA==}
     engines: {node: '>= 16.0.0'}
@@ -3197,6 +3205,11 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  svelte-writable-derived@3.1.1:
+    resolution: {integrity: sha512-w4LR6/bYZEuCs7SGr+M54oipk/UQKtiMadyOhW0PTwAtJ/Ai12QS77sLngEcfBx2q4H8ZBQucc9ktSA5sUGZWw==}
+    peerDependencies:
+      svelte: ^3.2.1 || ^4.0.0-next.1 || ^5.0.0-next.94
 
   svelte2tsx@0.7.36:
     resolution: {integrity: sha512-nBlERuCZRwmpebC8m0vDqZ9oaKsqW8frQS2l3zwFQW1voQIkItYtHxh1F5OTZEmE0meDIH6cxU36eIOQVOxlCw==}
@@ -6361,6 +6374,11 @@ snapshots:
     optionalDependencies:
       svelte: 5.28.2
 
+  svelte-french-toast@1.2.0(svelte@5.28.2):
+    dependencies:
+      svelte: 5.28.2
+      svelte-writable-derived: 3.1.1(svelte@5.28.2)
+
   svelte-preprocess@5.1.4(postcss-load-config@3.1.4(postcss@8.5.3)(ts-node@10.9.2(@types/node@22.14.1)(typescript@5.8.3)))(postcss@8.5.3)(svelte@5.28.2)(typescript@5.8.3):
     dependencies:
       '@types/pug': 2.0.10
@@ -6373,6 +6391,10 @@ snapshots:
       postcss: 8.5.3
       postcss-load-config: 3.1.4(postcss@8.5.3)(ts-node@10.9.2(@types/node@22.14.1)(typescript@5.8.3))
       typescript: 5.8.3
+
+  svelte-writable-derived@3.1.1(svelte@5.28.2):
+    dependencies:
+      svelte: 5.28.2
 
   svelte2tsx@0.7.36(svelte@5.28.2)(typescript@5.8.3):
     dependencies:
