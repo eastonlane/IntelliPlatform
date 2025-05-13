@@ -2,16 +2,12 @@ import { validatePassword, validateUsername } from '$lib/utils/userInputUtil';
 import { userTable } from '@dal/schema/user';
 import { hash } from '@node-rs/argon2';
 import { fail, redirect, isHttpError } from '@sveltejs/kit';
-import * as auth from '$lib/server/auth';
 import * as m from '$lib/paraglide/messages';
-import DbLoader from '@dal';
 import { v4 as uuidv4 } from 'uuid';
 import { localizeUrl } from '$lib/paraglide/runtime.js';
-import { env } from '$env/dynamic/private';
 import { count, eq } from 'drizzle-orm';
 import logger from '$lib/logger';
-
-const dbLoader = new DbLoader(env.VITE_DATABASE_URL!);
+import { dbLoader } from '$lib/helper/dbHelper';
 
 export const actions = {
 	default: async (event) => {

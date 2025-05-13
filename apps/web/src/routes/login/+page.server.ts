@@ -5,13 +5,10 @@ import * as auth from '$lib/server/auth';
 import * as m from '$lib/paraglide/messages';
 import type { Actions, PageServerLoad } from './$types';
 import { userTable } from '@dal/schema/user';
-import DbLoader from '@dal';
 import { validatePassword, validateUsername } from '$lib/utils/userInputUtil';
 import { localizeUrl } from '$lib/paraglide/runtime';
 import logger from '$lib/logger';
-import { env } from '$env/dynamic/private';
-
-const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
+import { dbLoader } from '$lib/helper/dbHelper';
 
 export const load: PageServerLoad = async (event) => {
 	if (event.locals.user) {

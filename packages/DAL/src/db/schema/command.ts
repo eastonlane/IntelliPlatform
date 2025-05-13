@@ -3,7 +3,7 @@ import { basicInfoEntityBase, timestamps } from "../columns.helpers";
 import { userTable } from "./user";
 import { jsonb } from "drizzle-orm/pg-core";
 
-export const Action = pgTable("action", {
+export const DeviceAction = pgTable("action", {
   ...basicInfoEntityBase,
 
   userId: uuid().references(() => userTable.id),
@@ -12,10 +12,10 @@ export const Action = pgTable("action", {
 
   ...timestamps,
 });
-export type ActionDO = typeof Action.$inferInsert;
-export type ActionVO = typeof Action.$inferSelect;
+export type DeviceActionDO = typeof DeviceAction.$inferInsert;
+export type DeviceActionVO = typeof DeviceAction.$inferSelect;
 
-export const Command = pgTable("command", {
+export const DeviceCommand = pgTable("command", {
   ...basicInfoEntityBase,
 
   userId: uuid().references(() => userTable.id),
@@ -23,5 +23,5 @@ export const Command = pgTable("command", {
 
   ...timestamps,
 });
-export type CommandDO = typeof Command.$inferInsert;
-export type CommandVO = typeof Command.$inferSelect;
+export type DeviceCommandDO = typeof DeviceCommand.$inferInsert;
+export type DeviceCommandVO = typeof DeviceCommand.$inferSelect;

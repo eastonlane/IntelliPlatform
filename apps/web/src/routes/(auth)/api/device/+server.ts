@@ -4,11 +4,8 @@ import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { and, eq } from 'drizzle-orm';
 import { count, ilike, inArray, isNull } from 'drizzle-orm';
 import { v4 as uuidv4, validate } from 'uuid';
-import { env } from '$env/dynamic/private';
-import DbLoader from '@dal';
 import { ensureAuthenticated } from '$lib/helper/authHelper';
-
-const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
+import { dbLoader } from '$lib/helper/dbHelper';
 
 export const GET: RequestHandler = async ({ url, locals }) => {
 	ensureAuthenticated(locals);

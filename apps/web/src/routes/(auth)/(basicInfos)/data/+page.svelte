@@ -1,9 +1,9 @@
 <script lang="ts">
 	import DateRangeBar from '$lib/components/DateRangeBar.svelte';
+	import fetchWrapper from '$lib/helper/requestHelper.js';
 	import { m } from '$lib/paraglide/messages';
 	import { type MetricsDO } from '@dal/schema/metrics';
 	import { Button, Card, Chart, MultiSelect, WidgetPlaceholder } from 'flowbite-svelte';
-	import fetchWrapper from '../../../request';
 	import toast, { Toaster } from 'svelte-french-toast';
 
 	let timeRangeBegin = $state(new Date());

@@ -2,12 +2,9 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
-import { env } from '$env/dynamic/private';
-import { sessionTable, type Session  } from '@dal/schema/auth'
-import { userTable } from '@dal/schema/user'
-import DbLoader from '@dal';
-
-const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
+import { sessionTable, type Session } from '@dal/schema/auth';
+import { userTable } from '@dal/schema/user';
+import { dbLoader } from '$lib/helper/dbHelper';
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
@@ -32,8 +29,8 @@ export async function createSession(token: string, userId: string) {
 
 export async function validateSessionToken(token: string) {
 	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
-	const [result] = 
-	await dbLoader.getDb()
+	const [result] = await dbLoader
+		.getDb()
 		.select({
 			// Adjust user table here to tweak returned data
 			user: { id: userTable.id, username: userTable.name },
@@ -57,7 +54,8 @@ export async function validateSessionToken(token: string) {
 	const renewSession = Date.now() >= session.expiresAt.getTime() - DAY_IN_MS * 15;
 	if (renewSession) {
 		session.expiresAt = new Date(Date.now() + DAY_IN_MS * 30);
-		await dbLoader.getDb()
+		await dbLoader
+			.getDb()
 			.update(sessionTable)
 			.set({ expiresAt: session.expiresAt })
 			.where(eq(sessionTable.id, session.id));

@@ -1,12 +1,9 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages';
-import DbLoader from '@dal';
-import { env } from '$env/dynamic/private';
 import { metrics } from '@dal/schema/metrics';
 import { and, gt, inArray, lt } from 'drizzle-orm';
 import { ensureAuthenticated } from '$lib/helper/authHelper';
-
-const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
+import { dbLoader } from '$lib/helper/dbHelper';
 
 export const GET: RequestHandler = async ({ url, locals }) => {
 	ensureAuthenticated(locals);

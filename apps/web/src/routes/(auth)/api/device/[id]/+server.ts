@@ -1,12 +1,9 @@
 import { device, type DeviceDO } from '@dal/schema/device';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { validate as validateUUID } from 'uuid';
-import { env } from '$env/dynamic/private';
-import DbLoader from '@dal';
 import { ensureAuthenticated } from '$lib/helper/authHelper';
 import { and, eq, isNull } from 'drizzle-orm';
-
-const dbLoader = new DbLoader(env.VITE_DATABASE_URL);
+import { dbLoader } from '$lib/helper/dbHelper';
 
 export const PUT: RequestHandler = async ({ params, request, locals }) => {
 	ensureAuthenticated(locals);

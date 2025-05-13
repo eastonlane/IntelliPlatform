@@ -43,6 +43,7 @@
 		>
 		<NavLi href={localizeHref('/device')}>{m.topBar_devices()}</NavLi>
 		<NavLi href={localizeHref('/data')}>{m.topBar_data()}</NavLi>
+		<NavLi href={localizeHref('/command')}>{m.topBar_command()}</NavLi>
 	</NavUl>
 
 	<div class="flex flex-row justify-around gap-2 align-middle">
