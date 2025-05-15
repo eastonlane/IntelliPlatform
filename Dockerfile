@@ -11,6 +11,7 @@ ENV NODE_ENV='production'
 
 ARG PNPM_REGISTRY
 ENV PNPM_REGISTRY=$PNPM_REGISTRY
+ENV GCP_BUILDPACKS=true
 # Optional: set up .npmrc with the registry
 RUN [ -n "$PNPM_REGISTRY" ] && echo "registry=$PNPM_REGISTRY" >> .npmrc || true
 
