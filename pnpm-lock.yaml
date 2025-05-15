@@ -160,6 +160,9 @@ importers:
       vite:
         specifier: ^6.3.2
         version: 6.3.4(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(tsx@4.19.3)
+      wrangler:
+        specifier: ^4.15.1
+        version: 4.15.1(@cloudflare/workers-types@4.20250515.0)
 
   apps/worker:
     dependencies:
