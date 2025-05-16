@@ -14,7 +14,6 @@
 		Textarea
 	} from 'flowbite-svelte';
 	import { CheckOutline, CircleMinusOutline, CirclePlusOutline } from 'flowbite-svelte-icons';
-	import toast from 'svelte-french-toast';
 
 	const partitionContainerClass =
 		'border-brown relative box-border flex flex-col gap-6 rounded-xl border-2 p-4 pt-6';
