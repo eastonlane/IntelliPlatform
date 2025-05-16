@@ -104,5 +104,29 @@
 		"emptyDeviceListIsProvided": "少なくとも1つのデバイスが必要です",
 		"wrongParamters": "間違ったパラメータ",
 		"noMetricsFound": "データが見つかりません"
+	},
+	"topBar_command": "コマンド",
+	"command": {
+		"newActionDrawer": {
+			"title": "新しいデバイスアクションの追加",
+			"actionNameInput": "アクション名",
+			"addNewActionButton": "アクションを追加",
+			"dataTypeSelectorPlaceholder": "データタイプを選択",
+			"defaultValueInputPlaceholder": "デフォルト値",
+			"stringTypeMinLength": "最小長さ",
+			"stringTypeMaxLength": "最大長",
+			"numberTypeMinValue": "最小値",
+			"numberTypeMaxValue": "最大値",
+			"isRequireeCheckbox": "必須？",
+			"descriptinTextAreaPlaceholder": "アクションの説明",
+			"partitionTitles": {
+				"basic": "基本情報",
+				"property": "プロパティの設定",
+				"actions": "手術"
+			},
+			"addSuccessMessage": "アクションの追加に成功しました",
+			"keyNameInputPlaceholder": "キー名",
+			"warningForEnumList": "列挙型には少なくとも 1 つの要素が必要です。"
+		}
 	}
 }

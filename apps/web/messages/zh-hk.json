@@ -104,5 +104,29 @@
 		"emptyDeviceListIsProvided": "至少需要一台設備",
 		"wrongParamters": "錯誤參數",
 		"noMetricsFound": "未找到數據"
+	},
+	"topBar_command": "命令",
+	"command": {
+		"newActionDrawer": {
+			"title": "新增設備操作",
+			"actionNameInput": "動作名稱",
+			"addNewActionButton": "新增操作",
+			"dataTypeSelectorPlaceholder": "選擇資料類型",
+			"defaultValueInputPlaceholder": "預設值",
+			"stringTypeMinLength": "最小長度",
+			"stringTypeMaxLength": "最大長度",
+			"numberTypeMinValue": "最小值",
+			"numberTypeMaxValue": "最大值",
+			"isRequireeCheckbox": "必需的？",
+			"descriptinTextAreaPlaceholder": "動作描述",
+			"partitionTitles": {
+				"basic": "基本訊息",
+				"property": "屬性設定",
+				"actions": "手術"
+			},
+			"addSuccessMessage": "成功新增操作",
+			"keyNameInputPlaceholder": "鍵名稱",
+			"warningForEnumList": "枚舉類型至少需要一個元素！"
+		}
 	}
 }

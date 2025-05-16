@@ -104,5 +104,29 @@
 		"emptyDeviceListIsProvided": "At least one device is required",
 		"wrongParamters": "wrong parameter(s)",
 		"noMetricsFound": "no data found"
+	},
+	"topBar_command": "Commands",
+	"command": {
+		"newActionDrawer": {
+			"title": "Add New Device Action",
+			"actionNameInput": "Action Name",
+			"addNewActionButton": "Add Action",
+			"dataTypeSelectorPlaceholder": "Select Data Type",
+			"defaultValueInputPlaceholder": "Default Value",
+			"stringTypeMinLength": "Minimum Length",
+			"stringTypeMaxLength": "Maximum Length",
+			"numberTypeMinValue": "Mininum Value",
+			"numberTypeMaxValue": "Maximum Value",
+			"isRequireeCheckbox": "Required?",
+			"descriptinTextAreaPlaceholder": "Action description",
+			"partitionTitles": {
+				"basic": "Basic Information",
+				"property": "Properties Setup",
+				"actions": "Operation"
+			},
+			"addSuccessMessage": "Success adding action",
+			"keyNameInputPlaceholder": "Key Name",
+			"warningForEnumList": "Enum Type need at least one element!"
+		}
 	}
 }

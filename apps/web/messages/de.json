@@ -104,5 +104,29 @@
 		"emptyDeviceListIsProvided": "Mindestens ein Gerät ist erforderlich",
 		"wrongParamters": "falsche(r) Parameter",
 		"noMetricsFound": "keine Daten gefunden"
+	},
+	"topBar_command": "Befehle",
+	"command": {
+		"newActionDrawer": {
+			"title": "Aktion „Neues Gerät hinzufügen“",
+			"actionNameInput": "Aktionsname",
+			"addNewActionButton": "Aktion hinzufügen",
+			"dataTypeSelectorPlaceholder": "Datentyp auswählen",
+			"defaultValueInputPlaceholder": "Standardwert",
+			"stringTypeMinLength": "Mindestlänge",
+			"stringTypeMaxLength": "Maximale Länge",
+			"numberTypeMinValue": "Mindestwert",
+			"numberTypeMaxValue": "Maximalwert",
+			"isRequireeCheckbox": "Erforderlich?",
+			"descriptinTextAreaPlaceholder": "Aktionsbeschreibung",
+			"partitionTitles": {
+				"basic": "Grundlegende Informationen",
+				"property": "Eigenschaften-Setup",
+				"actions": "Betrieb"
+			},
+			"addSuccessMessage": "Erfolg beim Hinzufügen der Aktion",
+			"keyNameInputPlaceholder": "Schlüsselname",
+			"warningForEnumList": "Der Enumerationstyp benötigt mindestens ein Element!"
+		}
 	}
 }

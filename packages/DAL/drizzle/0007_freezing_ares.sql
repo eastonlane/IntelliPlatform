@@ -1,0 +1,2 @@
+ALTER TABLE "action" ADD CONSTRAINT "stringLengthCheck" CHECK (NOT ("action"."minLength" IS NOT NULL AND "action"."maxLength" IS NOT NULL and "action"."minLength" > "action"."maxLength"));--> statement-breakpoint
+ALTER TABLE "action" ADD CONSTRAINT "numberBoundaryCheck" CHECK (NOT ("action"."minValue" IS NOT NULL AND "action"."maxValue" IS NOT NULL and "action"."minValue" > "action"."maxValue"));
